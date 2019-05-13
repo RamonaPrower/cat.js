@@ -1,0 +1,5 @@
+{
+    "discord": "discord API key",
+    "db": "db url",
+    "inviteLink": "https://discordapp.com/api/oauth2/authorize?client_id=**ADD ID HERE**scope=bot&permissions=100352"
+}

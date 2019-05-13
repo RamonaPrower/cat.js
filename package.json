@@ -1,0 +1,16 @@
+{
+  "name": "cat",
+  "version": "1.0.0",
+  "description": "cat",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ramona Prower",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "mongoose": "^5.5.5"
+  }
+}
