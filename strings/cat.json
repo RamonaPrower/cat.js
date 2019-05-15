@@ -9,5 +9,10 @@
         "neutral": ["<:meowhmph:575816294390038539>", "<:meowflushed:575816294536970262>"],
         "sad": ["<:meowsad:575818640285237248>", "<:meownotamused:575818640054550528>", "<:meowpout:575816294809731073>"]
     },
-    "info" : ["Henlo...i am an cat....", "U can FeEED me ((@me feed)),, play wiv me((@me play)),giv me PETS ((@me pet, @me pet pat, pet cat)) oar... C how i feel!!!((@me mood))", "I get Happi when huumans FEED ME wen i hungy, oar if i'm in GOOD MOOD & u pets....yes.....", "I only Aloud in chanel where BEDS R ((@me place bed, must be able to manage channels)), so pls LUV ME LOTS!!!!!"]
+    "hunger": {
+        "yes": ["<:meowhungry:578260722623053845>", "<:meowreach:578260721968742461>", "<:meowreachsob:578260722752946177>"],
+        "no": ["<:meowhmph:575816294390038539>"]
+    },
+    "fed": ["<:meownomcookie:578260722232983574>", "<:meowsip:578260722652413976>"],
+    "info" : ["Henlo...i am an cat....", "U can FeEED me ((@me feed)),, play wiv me((@me play)),giv me PETS ((@me pet, @me pet pat, pet cat)) oar... C how i feel!!!((@me mood, @me hunger))", "I get Happi when huumans FEED ME wen i hungy, oar if i'm in GOOD MOOD & u pets....yes.....", "I only Aloud in chanel where BEDS R ((@me place bed, must be able to manage channels)), so pls LUV ME LOTS!!!!!"]
 }

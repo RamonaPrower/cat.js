@@ -1,7 +1,7 @@
 const fs = require('fs');
 const Discord = require('discord.js');
 const config = require('./config.json');
-const Cat = require('./utils/cat');
+const { Cat } = require('./utils/cat');
 const mongoose = require('mongoose');
 const { Channel } = require('./models/channel');
 const client = new Discord.Client;

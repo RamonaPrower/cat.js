@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const channelSchema = new mongoose.Schema({
     snowflake: {
         type: String,
-        required: true
-    }
+        required: true,
+    },
 });
-channelSchema.statics.checkChannel = async function (snowflake) {
+channelSchema.statics.checkChannel = async function(snowflake) {
     return this.findOne({
-        snowflake: snowflake
+        snowflake: snowflake,
     });
 };
 
