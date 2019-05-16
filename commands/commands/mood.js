@@ -2,8 +2,7 @@
 // exports
 module.exports = {
 	async execute(message, globalCat) {
-		const moodString = globalCat.getMood();
-		message.channel.send(`${moodString}`);
+		message.channel.send(globalCat.getMood());
 	},
 };
 

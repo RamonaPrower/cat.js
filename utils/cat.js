@@ -162,6 +162,10 @@ class GuildCat extends Cat {
 		if (this.hunger <= 4) return hungryStr;
 		else return notHungryStr;
 	}
+	/**
+	 * Feeds the cat
+	 * @returns {string} the mood, as an emoji string
+	 */
 	feed() {
 		function rand(i) {
 			return Math.floor(Math.random() * i);

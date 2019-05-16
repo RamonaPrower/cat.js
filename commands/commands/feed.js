@@ -2,11 +2,9 @@
 const { GuildCat } = require('../../utils/cat');
 // exports
 module.exports = {
-	async execute(message, globalCat) {
-        const guildId = message.guild.id;
-        const guildCat = await GuildCat.create(guildId);
-        const hunger = guildCat.feed();
-        message.channel.send(hunger);
+	async execute(message) {
+        const guildCat = await GuildCat.create(message.guild.id);
+        message.channel.send(guildCat.feed());
 	},
 };
 

@@ -4,6 +4,7 @@ const config = require('./config.json');
 const { Cat } = require('./utils/cat');
 const mongoose = require('mongoose');
 const { Channel } = require('./models/channel');
+const moment = require('moment');
 const client = new Discord.Client;
 let globalCat;
 
@@ -27,6 +28,8 @@ for (const file of triggerFiles) {
 	const trigger = require(`./commands/triggers/${file}`);
 	client.triggers.set(trigger.tag, trigger);
 }
+
+const guildUpdate = new Discord.Collection();
 
 client.on('ready', () => {
 	console.log(`I'm up, and i'm part of ${client.guilds.size} servers`);
@@ -60,17 +63,39 @@ client.on('message', async message => {
 			return;
 		}
 	}
-	// channel verification
+	// channel + guild verification
 	const search = await Channel.checkChannel(message.channel.id);
 	if (!search) {
 		console.log('channel not allowed');
 		return;
+	}
+	const guildId = message.guild.id;
+	const timeNow = new Date();
+	// we store a guild and last updated time in memory to save on DB updates
+	// if these aren't 100% accurate, it's not the end of the world
+	if (guildUpdate.has(guildId)) {
+		const guildUpdateTime = guildUpdate.get(guildId);
+		const diff = moment().diff(guildUpdateTime, 'hours');
+		if (diff === 0) {
+			console.log('no update needed');
+		}
+		// do update stuff when i build the command
+		else {
+		console.log('update time');
+		guildUpdate.set(guildId, timeNow);
+		}
+
+	}
+	else {
+		console.log('created Guild in volmem');
+		guildUpdate.set(guildId, timeNow);
 	}
 	// post-verification
 	for (const key of client.commands) {
 		newReg = new RegExp(key[1].regexp, 'gmi');
 		if (newReg.test(message.content)) {
 			console.log('found ' + key[1].info.name);
+			guildUpdate.set(message.guild.id, new Date());
 			key[1].execute(message, globalCat);
 			return;
 		}
@@ -78,11 +103,14 @@ client.on('message', async message => {
 	const dice = Math.floor((Math.random() * 100) + 1);
 	for (const key of client.triggers) {
 		newReg = new RegExp(key[1].regexp, 'gmi');
-		if (newReg.test(message.content)) {
+		if (newReg.test(message.content) && dice > 98) {
 			console.log('found ' + key[1].info.name);
 			key[1].execute(message, globalCat);
 			return;
 		}
+	}
+	if (message.content.includes('guildLog')) {
+		console.log(guildUpdate);
 	}
 });
 
