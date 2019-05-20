@@ -107,11 +107,11 @@ client.on('message', async message => {
 			}
 		}
 	}
-	const dice = 99;
+	const dice = 1;
 	// const dice = Math.floor((Math.random() * 100) + 1);
 	for (const key of client.triggers) {
 		newReg = new RegExp(key[1].regexp, key[1].flags);
-		if (newReg.test(message.content) && dice > 98) {
+		if (newReg.test(message.content) && dice <= key[1].chance) {
 			console.log('found ' + key[1].info.name);
 			key[1].execute(message, globalCat);
 			return;

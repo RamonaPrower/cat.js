@@ -31,13 +31,23 @@ class Cat {
 		};
 	}
 }
-
+/**
+ * Creates a new UserCat
+ * @author Ramona Prower
+ * @this {UserCat}
+ * @extends {Cat}
+ * @exports UserCat
+ */
 class UserCat extends Cat {
 	constructor(search) {
 		super();
 		this.user = search;
 
 	}
+	/**
+	 * Creates a new UserCat based on the users's id
+	 * @param {snowflake} userId This is the Users snowflake, to look up in the database
+	 */
 	static async create(userId) {
 		let search = await User.checkUser(userId);
 		if (!search) {
@@ -52,7 +62,7 @@ class UserCat extends Cat {
 	/**
 	 * Gets a reaction to a user doing something to the cat
 	 * @param {number} globalMood This is the Global Mood of the GlobalCat
-	 * @param {string} action This is the action that you want to do
+	 * @param {string} action This is the action that you want to do (currently 'pet' and 'meow')
 	 */
 	getReaction(globalMood, action) {
 		const dice = Math.floor((Math.random() * 100) + 1);
@@ -120,6 +130,7 @@ class UserCat extends Cat {
  * @author: Ramona Prower
  * @this {GuildCat}
  * @extends {Cat}
+ * @exports GuildCat
  */
 class GuildCat extends Cat {
 	constructor(search) {
@@ -129,7 +140,6 @@ class GuildCat extends Cat {
 	}
 	/**
 	 * Creates/retrieves a new Guild cat (needs to be constructed this way because of async DB lookups)
-	 * @constructor
 	 * @param {guildID} guildId the ID of the guild that the cat lives in
 	 */
 	static async create(guildId) {

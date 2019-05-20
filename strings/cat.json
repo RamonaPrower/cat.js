@@ -15,5 +15,8 @@
     },
     "fed": ["<:meownomcookie:578260722232983574>", "<:meowsip:578260722652413976>"],
     "info" : ["Henlo...i am an cat....", "U can FeEED me ((@me feed)),, play wiv me((@me play)),giv me PETS ((@me pet, @me pet pat, pet cat)) oar... C how i feel!!!((@me mood, @me hunger))", "I get Happi when huumans FEED ME wen i hungy, oar if i'm in GOOD MOOD & u pets....yes.....", "I only Aloud in chanel where BEDS R ((@me place bed, must be able to manage channels)), so pls LUV ME LOTS!!!!!"],
-    "shout" : ["<:meowyikes:580076064152485912>", "<:meowterrified:580076064051822592>"]
+    "shout" : ["<:meowyikes:580076064152485912>", "<:meowterrified:580076064051822592>"],
+    "catsounds": ["<:meowuwu:575816294280986625>", "<:meowsquee:575816294042042375>", "<:meowsmile:575816294507741184>", "<:meowhello:575816294646022145>", "<:cathappy:575567233254948865>", "<:meowbigsmile:575818640616587278>", "<:meowamused:575818640083910677>","<:meowmelt:575818640000024597>"],
+    "calmphrases": ["it's ok", "don't worry", "pet pat", "poor cat"],
+    "calmemojis": ["<:pethappy:575816294054756382>", "<:meowhmph:575816294390038539>"]
 }
