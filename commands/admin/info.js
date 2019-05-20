@@ -2,9 +2,8 @@
 const strings = require('../../strings/cat.json');
 // exports
 module.exports = {
-	execute(message, globalCat) {
+	execute(message) {
 		message.channel.send(strings.info, { split: true });
-		message.channel.send(`${globalCat.getMood()}`);
 	},
 };
 

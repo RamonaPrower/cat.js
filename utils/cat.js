@@ -1,6 +1,7 @@
 // imports
 const strings = require('../strings/cat.json');
 const { Guild } = require('../models/guild');
+const { User } = require('../models/user');
 // internals
 /**
  * Creates a new Cat
@@ -118,6 +119,90 @@ class Cat {
 		};
 	}
 }
+
+class UserCat extends Cat {
+	constructor(search) {
+		super();
+		this.user = search;
+
+	}
+	static async create(userId) {
+		let search = await User.checkUser(userId);
+		if (!search) {
+			const user = new User({
+				snowflake: userId,
+			});
+			await user.save();
+			search = await User.checkUser(userId);
+		}
+		return new UserCat(search);
+	}
+	/**
+	 * Gets a reaction to a user doing something to the cat
+	 * @param {number} globalMood This is the Global Mood of the GlobalCat
+	 * @param {string} action This is the action that you want to do
+	 */
+	getReaction(globalMood, action) {
+		const dice = Math.floor((Math.random() * 100) + 1);
+		let overallMood = globalMood + this.user.happiness;
+		let foundAction;
+		if (action === 'pet') {
+			foundAction = strings.pet;
+		}
+		else if (action === 'meow') {
+			foundAction = strings.meow;
+		}
+		else {return new Error('invalid action');}
+		function rand(i) {
+			return Math.floor(Math.random() * i);
+		}
+		const happyArr = foundAction.happy;
+		const neutralArr = foundAction.neutral;
+		const sadArr = foundAction.sad;
+		const happyStr = happyArr[rand(happyArr.length)];
+		const neutralStr = neutralArr[rand(neutralArr.length)];
+		const sadStr = sadArr[rand(sadArr.length)];
+
+		if (globalMood <= 2) {
+			overallMood--;
+			overallMood--;
+		}
+		if (globalMood > 6) {
+			overallMood++;
+			overallMood++;
+		}
+		if (overallMood <= 0) {
+			return sadStr;
+		}
+		if (overallMood <= 3) {
+			if (dice <= 25) {
+				return sadStr;
+			}
+			else if (dice <= 66) {
+				this.user.positive();
+				return neutralStr;
+			}
+			else {
+				this.user.positive();
+				return happyStr;
+			}
+		}
+		if (overallMood <= 6) {
+			if (dice <= 66) {
+				this.user.positive();
+				return neutralStr;
+			}
+			else {
+				this.user.positive();
+				return happyStr;
+			}
+		}
+		else {
+			this.user.positive();
+			return happyStr;
+		}
+	}
+}
 /**
  * Creates a new Guild Cat
  * @author: Ramona Prower
@@ -186,3 +271,4 @@ class GuildCat extends Cat {
 // exports
 module.exports.Cat = Cat;
 module.exports.GuildCat = GuildCat;
+module.exports.UserCat = UserCat;
