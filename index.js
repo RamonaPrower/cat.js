@@ -53,16 +53,20 @@ function updateCat() {
 client.on('message', async message => {
 	if (message.author.bot) return;
 	let newReg;
-	if (!message.isMentioned(client.user)) return;
+	const mentioned = message.isMentioned(client.user);
+
 	// pre-verification admin/info ops
-	for (const key of client.admin) {
-		newReg = new RegExp(key[1].regexp, 'gmi');
-		if (newReg.test(message.content)) {
-			console.log('found ' + key[1].info.name);
-			key[1].execute(message, globalCat);
-			return;
+	if (mentioned === true) {
+		for (const key of client.admin) {
+			newReg = new RegExp(key[1].regexp, 'gm');
+			if (newReg.test(message.content)) {
+				console.log('found ' + key[1].info.name);
+				key[1].execute(message, globalCat);
+				return;
+			}
 		}
 	}
+
 	// channel + guild verification
 	const search = await Channel.checkChannel(message.channel.id);
 	if (!search) {
@@ -73,6 +77,7 @@ client.on('message', async message => {
 	const timeNow = new Date();
 	// we store a guild and last updated time in memory to save on DB updates
 	// if these aren't 100% accurate, it's not the end of the world
+	// i might update this to users, but i'm not all that big on it right now
 	if (guildUpdate.has(guildId)) {
 		const guildUpdateTime = guildUpdate.get(guildId);
 		const diff = moment().diff(guildUpdateTime, 'hours');
@@ -91,18 +96,21 @@ client.on('message', async message => {
 		guildUpdate.set(guildId, timeNow);
 	}
 	// post-verification
-	for (const key of client.commands) {
-		newReg = new RegExp(key[1].regexp, 'gmi');
-		if (newReg.test(message.content)) {
-			console.log('found ' + key[1].info.name);
-			guildUpdate.set(message.guild.id, new Date());
-			key[1].execute(message, globalCat);
-			return;
+	if (mentioned === true) {
+		for (const key of client.commands) {
+			newReg = new RegExp(key[1].regexp, 'gmi');
+			if (newReg.test(message.content)) {
+				console.log('found ' + key[1].info.name);
+				guildUpdate.set(message.guild.id, new Date());
+				key[1].execute(message, globalCat);
+				return;
+			}
 		}
 	}
-	const dice = Math.floor((Math.random() * 100) + 1);
+	const dice = 99;
+	// const dice = Math.floor((Math.random() * 100) + 1);
 	for (const key of client.triggers) {
-		newReg = new RegExp(key[1].regexp, 'gmi');
+		newReg = new RegExp(key[1].regexp, key[1].flags);
 		if (newReg.test(message.content) && dice > 98) {
 			console.log('found ' + key[1].info.name);
 			key[1].execute(message, globalCat);
