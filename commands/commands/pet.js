@@ -1,10 +1,10 @@
 // imports
-const { UserCat } = require('../../utils/cat');
+const { GuildUserCat } = require('../../utils/cat');
 // exports
 module.exports = {
 	async execute(message, globalCat) {
-		const userCat = await UserCat.create(message.author.id);
-		message.channel.send(userCat.getReaction(globalCat.mood, 'pet'));
+		const guildUserCat = await GuildUserCat.create(message.guild.id, message.author.id);
+		message.channel.send(guildUserCat.getReaction(globalCat.mood, 'pet'));
 	},
 };
 

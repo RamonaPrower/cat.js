@@ -28,6 +28,12 @@ for (const file of triggerFiles) {
 	const trigger = require(`./commands/triggers/${file}`);
 	client.triggers.set(trigger.tag, trigger);
 }
+client.superadmin = new Discord.Collection();
+const superAdminFiles = fs.readdirSync('./commands/superadmin').filter(file => file.endsWith('.js'));
+for (const file of superAdminFiles) {
+	const superAdmin = require(`./commands/superadmin/${file}`);
+	client.superadmin.set(superAdmin.tag, superAdmin);
+}
 
 const guildUpdate = new Discord.Collection();
 
@@ -117,8 +123,14 @@ client.on('message', async message => {
 			return;
 		}
 	}
-	if (message.content.includes('guildLog')) {
-		console.log(guildUpdate);
+	if (message.author.id === '132351312141484033' && mentioned === true) {
+		for (const key of client.superadmin) {
+			newReg = new RegExp(key[1].regexp, 'gmi');
+			if (newReg.text(message.content)) {
+				console.log('found ' + key[1].info.name);
+				key[1].execute(message, globalCat);
+			}
+		}
 	}
 });
 

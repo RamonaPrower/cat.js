@@ -89,7 +89,7 @@ class UserCat extends Cat {
 			overallMood--;
 			overallMood--;
 		}
-		if (globalMood > 6) {
+		if (globalMood > 8) {
 			overallMood++;
 			overallMood++;
 		}
@@ -109,7 +109,7 @@ class UserCat extends Cat {
 				return happyStr;
 			}
 		}
-		if (overallMood <= 6) {
+		if (overallMood <= 7) {
 			if (dice <= 66) {
 				this.user.positive();
 				return neutralStr;
@@ -117,6 +117,12 @@ class UserCat extends Cat {
 			else {
 				this.user.positive();
 				return happyStr;
+			}
+		}
+		if (overallMood >= 20) {
+			if (dice <= 90) {
+				this.user.positive();
+				return '<:catlove:575816294113476608>';
 			}
 		}
 		else {
@@ -151,7 +157,7 @@ class GuildCat extends Cat {
 			await guild.save();
 			search = await Guild.checkGuild(guildId);
 		}
-		await search.updateHunger();
+		await search.update();
 		return new GuildCat(search);
 	}
 	/**
@@ -189,8 +195,171 @@ class GuildCat extends Cat {
 			return fedStr;
 		}
 	}
+	/**
+	 * Get whether the cat is awake or asleep
+	 * @param {Object} globalCat globalcat is needed to get the accurate mood
+	 * @returns {string}
+	 */
+	getAsleep(globalCat) {
+		function rand(i) {
+			return Math.floor(Math.random() * i);
+		}
+		const asleepArr = strings.asleep;
+		const asleepStr = asleepArr[rand(asleepArr.length)];
+		const moodStr = globalCat.getMood();
+		if (this.guild.asleep === true) return asleepStr;
+		else return moodStr;
+	}
+}
+
+class GuildUserCat extends Cat {
+	constructor(guildSearch, userSearch) {
+		super();
+		this.guild = guildSearch;
+		this.user = userSearch;
+	}
+	/**
+	 * Creates the Cat for use
+	 * @param {guildID} guildId The guild ID of the message
+	 * @param {userId} userId The User ID of the message
+	 */
+	static async create(guildId, userId) {
+		let userSearch = await User.checkUser(userId);
+		if (!userSearch) {
+			const user = new User({
+				snowflake: userId,
+			});
+			await user.save();
+			userSearch = await User.checkUser(userId);
+		}
+		let guildSearch = await Guild.checkGuild(guildId);
+		if (!guildSearch) {
+			const guild = new Guild({
+				snowflake: guildId,
+			});
+			await guild.save();
+			guildSearch = await Guild.checkGuild(guildId);
+		}
+		await guildSearch.update();
+
+		return new GuildUserCat(guildSearch, userSearch);
+	}
+	/**
+	 * Gets a reaction to a user doing something to the cat
+	 * @param {number} globalMood This is the Global Mood of the GlobalCat
+	 * @param {string} action This is the action that you want to do (currently 'pet' and 'meow')
+	 */
+	getReaction(globalMood, action) {
+		const dice = Math.floor((Math.random() * 100) + 1);
+		let overallMood = globalMood + (Math.round(this.user.happiness / 2));
+		let foundAction;
+		if (action === 'pet') {
+			foundAction = strings.pet;
+		}
+		else if (action === 'meow') {
+			foundAction = strings.meow;
+		}
+		else {return new Error('invalid action');}
+		function rand(i) {
+			return Math.floor(Math.random() * i);
+		}
+		const happyArr = foundAction.happy;
+		const neutralArr = foundAction.neutral;
+		const sadArr = foundAction.sad;
+		const hungryArr = strings.hunger.yes;
+		const asleepArr = strings.asleep;
+		const asleepStr = asleepArr[rand(asleepArr.length)];
+		const hungryStr = hungryArr[rand(hungryArr.length)];
+		const happyStr = happyArr[rand(happyArr.length)];
+		const neutralStr = neutralArr[rand(neutralArr.length)];
+		const sadStr = sadArr[rand(sadArr.length)];
+
+		if (this.guild.hunger <= 4) return hungryStr;
+		if (this.guild.asleep === true && overallMood <= 7) return asleepStr;
+		if (globalMood <= 2) {
+			overallMood--;
+			overallMood--;
+		}
+		if (globalMood > 8) {
+			overallMood++;
+			overallMood++;
+		}
+		if (overallMood <= 0) {
+			return sadStr;
+		}
+		if (overallMood <= 3) {
+			if (dice <= 25) {
+				return sadStr;
+			}
+			else if (dice <= 66) {
+				this.user.positive();
+				return neutralStr;
+			}
+			else {
+				this.user.positive();
+				return happyStr;
+			}
+		}
+		if (overallMood <= 7) {
+			if (dice <= 66) {
+				this.user.positive();
+				return neutralStr;
+			}
+			else {
+				this.user.positive();
+				return happyStr;
+			}
+		}
+		if (overallMood >= 15) {
+			if (dice <= 90) {
+				this.user.positive();
+				return '<:catlove:575816294113476608>';
+			}
+		}
+		else {
+			this.user.positive();
+			return happyStr;
+		}
+	}
+	/**
+	 * Gets the Hunger of the cat after construction
+	 * @returns {string} the mood, as an emoji string
+	 */
+	getHunger() {
+		function rand(i) {
+			return Math.floor(Math.random() * i);
+		}
+		const hungryArr = strings.hunger.yes;
+		const notHungryArr = strings.hunger.no;
+		const hungryStr = hungryArr[rand(hungryArr.length)];
+		const notHungryStr = notHungryArr[rand(notHungryArr.length)];
+		if (this.guild.hunger <= 4) return hungryStr;
+		else return notHungryStr;
+	}
+	/**
+	 * Feeds the cat
+	 * @returns {string} the mood, as an emoji string
+	 */
+	feed() {
+		function rand(i) {
+			return Math.floor(Math.random() * i);
+		}
+		const notHungryArr = strings.hunger.no;
+		const notHungryStr = notHungryArr[rand(notHungryArr.length)];
+		const fedArr = strings.fed;
+		const fedStr = fedArr[rand(fedArr.length)];
+		if (this.guild.hunger >= 4) {
+			return notHungryStr;
+		}
+		else {
+			this.guild.feed();
+			this.user.positive();
+			return fedStr;
+		}
+	}
 }
 // exports
 module.exports.Cat = Cat;
 module.exports.GuildCat = GuildCat;
 module.exports.UserCat = UserCat;
+module.exports.GuildUserCat = GuildUserCat;
