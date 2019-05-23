@@ -9,19 +9,22 @@ const welcome = response => {
 };
 // exports
 module.exports = {
-	async execute(message) {
+	async execute(message, awaitHandler) {
         const react = strings.catsounds[Math.floor(Math.random() * strings.catsounds.length)];
 	message.channel.send(react)
 	.then(() => {
+		awaitHandler.add(message.channel.id);
 		message.channel.awaitMessages(welcome, { maxMatches: 1, time: 15000, errors: ['time'] })
 		.then(async messages => {
 			const userMessage = await messages.first();
 			const userCat = await UserCat.create(userMessage.author.id);
 			userCat.user.positive();
 			message.channel.send(strings.meow.happy[Math.floor(Math.random() * strings.meow.happy.length)]);
+			awaitHandler.release(message.channel.id);
 			console.log('user positive action');
 		})
 		.catch(() => {
+			awaitHandler.release(message.channel.id);
 			console.log('no resp');
 		});
 	});
@@ -36,4 +39,5 @@ module.exports.info = {
 module.exports.regexp = '(meow|mrrp|:3|mrow|cat)';
 module.exports.flags = 'gmi';
 module.exports.chance = 2;
+module.exports.await = true;
 module.exports.tag = 'meow';

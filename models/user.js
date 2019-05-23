@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const moment = require('moment');
 
 const userSchema = new mongoose.Schema({
 	snowflake: {
@@ -9,17 +10,55 @@ const userSchema = new mongoose.Schema({
 		type: Number,
 		default: 0,
 	},
+	lastReset: {
+		type: Date,
+		required: true,
+        default: Date.now,
+	},
+	interactionsLeft: {
+		type: Number,
+		default: 3,
+		required: true,
+	},
 });
 userSchema.statics.checkUser = async function(snowflake) {
 	return this.findOne({
 		snowflake: snowflake,
 	});
 };
+// userSchema.methods.update = function() {
+
+// }
 userSchema.methods.positive = function() {
-	if (this.happiness >= 10) return this.happiness;
-	this.happiness++;
+	const timeNow = new Date();
+	const diff = moment().diff(this.lastReset, 'days');
+	// if it's been more than a day
+	if (diff >= 1) {
+		// if the happiness is over 5
+		if (this.happiness >= 5) {
+			this.happiness = this.happiness - diff;
+			// if it's now lower than 5, set it to 5
+			if (this.happiness <= 5) {
+				this.happiness = 5;
+			}
+		}
+		else {
+			this.happiness = this.happiness - diff;
+			// if it's now lower than 0, set it to 0
+			if (this.happiness < 0) {
+				this.happiness = 0;
+			}
+		}
+		this.lastReset = timeNow;
+		this.interactionsLeft = 3;
+	}
+	if (this.happiness >= 10) return;
+	if (this.interactionsLeft >= 1) {
+		this.happiness++;
+		this.interactionsLeft--;
+	}
 	this.save();
-	return this.happiness;
+	return;
 };
 
 const User = mongoose.model('User', userSchema);

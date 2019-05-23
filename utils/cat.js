@@ -275,7 +275,7 @@ class GuildUserCat extends Cat {
 		const sadStr = sadArr[rand(sadArr.length)];
 
 		if (this.guild.hunger <= 4) return hungryStr;
-		if (this.guild.asleep === true && overallMood <= 7) return asleepStr;
+		if (this.guild.asleep === true && this.user.happiness <= 8) return asleepStr;
 		if (globalMood <= 2) {
 			overallMood--;
 			overallMood--;

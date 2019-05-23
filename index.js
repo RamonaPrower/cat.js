@@ -2,6 +2,7 @@ const fs = require('fs');
 const Discord = require('discord.js');
 const config = require('./config.json');
 const { Cat } = require('./utils/cat');
+const { AwaitHandler } = require('./utils/await');
 const mongoose = require('mongoose');
 const { Channel } = require('./models/channel');
 const moment = require('moment');
@@ -36,6 +37,7 @@ for (const file of superAdminFiles) {
 }
 
 const guildUpdate = new Discord.Collection();
+const awaitHandler = new AwaitHandler();
 
 client.on('ready', () => {
 	console.log(`I'm up, and i'm part of ${client.guilds.size} servers`);
@@ -108,7 +110,13 @@ client.on('message', async message => {
 			if (newReg.test(message.content)) {
 				console.log('found ' + key[1].info.name);
 				guildUpdate.set(message.guild.id, new Date());
-				key[1].execute(message, globalCat);
+				if (key[1].await) {
+					key[1].execute(message, awaitHandler);
+				}
+				else {
+					key[1].execute(message, globalCat);
+				}
+
 				return;
 			}
 		}
@@ -119,7 +127,14 @@ client.on('message', async message => {
 		newReg = new RegExp(key[1].regexp, key[1].flags);
 		if (newReg.test(message.content) && dice <= key[1].chance) {
 			console.log('found ' + key[1].info.name);
-			key[1].execute(message, globalCat);
+			if (key[1].await) {
+				if (awaitHandler.isPaused(message.channel.id) === false) {
+					key[1].execute(message, awaitHandler);
+				}
+			}
+			else {
+				key[1].execute(message, globalCat);
+			}
 			return;
 		}
 	}

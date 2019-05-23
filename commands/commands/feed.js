@@ -9,17 +9,20 @@ const badfood = response => {
 };
 // exports
 module.exports = {
-	async execute(message) {
+	async execute(message, awaitHandler) {
 	const guildCat = await GuildCat.create(message.guild.id);
 	const fedCatStr = guildCat.feed();
 	message.channel.send(fedCatStr)
 	.then(() => {
 		if (fedCatStr === '<:meowsip:578260722652413976>') {
+			awaitHandler.add(message.channel.id);
 			message.channel.awaitMessages(badfood, { maxMatches: 1, time: 15000, errors: ['time'] })
 			.then(() => {
 				message.channel.send(strings.badfoodstring);
+				awaitHandler.release(message.channel.id);
 			})
 			.catch(() => {
+				awaitHandler.release(message.channel.id);
 				console.log('nothing');
 			});
 		}
@@ -33,5 +36,6 @@ module.exports.info = {
 	description: 'Feed the Cat',
 	summon: 'feed',
 };
+module.exports.await = true;
 module.exports.regexp = 'feed';
 module.exports.tag = 'feed';
