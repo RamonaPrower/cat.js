@@ -36,8 +36,8 @@ module.exports.info = {
 	description: 'Reacts to various cat sounds',
 	summon: 'cat noises',
 };
-module.exports.regexp = '(meow|mrrp|:3|mrow|cat)';
+module.exports.regexp = '\b(?:me+o+w+.*|cats?|ma+u+|me+w+|meor|nya+.?|miaou+|mi+a+u+|mlem|mrrr+)\b';
 module.exports.flags = 'gmi';
-module.exports.chance = 2;
+module.exports.chance = 6;
 module.exports.await = true;
 module.exports.tag = 'meow';

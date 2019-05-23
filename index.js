@@ -1,4 +1,3 @@
-const fs = require('fs');
 const Discord = require('discord.js');
 const config = require('./config.json');
 const { Cat } = require('./utils/cat');
@@ -8,32 +7,29 @@ const { Channel } = require('./models/channel');
 const moment = require('moment');
 const client = new Discord.Client;
 let globalCat;
+const commandList = require('./commands/command');
 
-client.commands = new Discord.Collection();
-const commandFiles = fs.readdirSync('./commands/commands').filter(file => file.endsWith('.js'));
-for (const file of commandFiles) {
-	const command = require(`./commands/commands/${file}`);
-	client.commands.set(command.tag, command);
-}
+// this is just a bunch of including the commands
+// adding them dynamically is easier but SOMEONE keeps saying it's bad practice so
+// this is on her
+// this also makes the game easier as i can add the file for both collections needed
 
 client.admin = new Discord.Collection();
-const adminFiles = fs.readdirSync('./commands/admin').filter(file => file.endsWith('.js'));
-for (const file of adminFiles) {
-	const admin = require(`./commands/admin/${file}`);
-	client.admin.set(admin.tag, admin);
+const adminComms = commandList.admin;
+for (const file of adminComms) {
+	client.admin.set(file.tag, file);
+}
+
+client.commands = new Discord.Collection();
+const commandsComms = commandList.commands;
+for (const file of commandsComms) {
+	client.commands.set(file.tag, file);
 }
 
 client.triggers = new Discord.Collection();
-const triggerFiles = fs.readdirSync('./commands/triggers').filter(file => file.endsWith('.js'));
+const triggerFiles = commandList.triggers;
 for (const file of triggerFiles) {
-	const trigger = require(`./commands/triggers/${file}`);
-	client.triggers.set(trigger.tag, trigger);
-}
-client.superadmin = new Discord.Collection();
-const superAdminFiles = fs.readdirSync('./commands/superadmin').filter(file => file.endsWith('.js'));
-for (const file of superAdminFiles) {
-	const superAdmin = require(`./commands/superadmin/${file}`);
-	client.superadmin.set(superAdmin.tag, superAdmin);
+	client.triggers.set(file.tag, file);
 }
 
 const guildUpdate = new Discord.Collection();
@@ -136,15 +132,6 @@ client.on('message', async message => {
 				key[1].execute(message, globalCat);
 			}
 			return;
-		}
-	}
-	if (message.author.id === '132351312141484033' && mentioned === true) {
-		for (const key of client.superadmin) {
-			newReg = new RegExp(key[1].regexp, 'gmi');
-			if (newReg.text(message.content)) {
-				console.log('found ' + key[1].info.name);
-				key[1].execute(message, globalCat);
-			}
 		}
 	}
 });
