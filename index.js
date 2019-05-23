@@ -33,6 +33,7 @@ for (const file of triggerFiles) {
 	client.triggers.set(file.settings.regexp, file);
 }
 
+
 const awaitHandler = new AwaitHandler();
 
 client.on('ready', () => {
@@ -120,6 +121,13 @@ client.on('message', async message => {
 				value.execute(message, globalCat);
 			}
 			return;
+		}
+	}
+	if (thisGuildSettings.twitter === true) {
+		newReg = new RegExp(/https?:\/\/(?:mobile\.)?twitter\.com\/(?:#!\/)?(?:\w+)\/status(?:es)?\/(\d+)/, 'gmi');
+		if (newReg.test(message.content)) {
+			console.log('twitter link found');
+			commandList.twitter.execute(message);
 		}
 	}
 });

@@ -23,3 +23,7 @@ const meowTrigg = require('./triggers/meow');
 const shouting = require('./triggers/shouting');
 
 module.exports.triggers = [meowTrigg, shouting];
+
+const twitter = require('./twitter/twitter');
+
+module.exports.twitter = twitter;

@@ -1,5 +1,11 @@
 {
     "discord": "discord API key",
     "db": "db url",
-    "inviteLink": "https://discordapp.com/api/oauth2/authorize?client_id=**ADD ID HERE**scope=bot&permissions=100352"
+    "inviteLink": "https://discordapp.com/api/oauth2/authorize?client_id=**ADD ID HERE**scope=bot&permissions=100352",
+    "ckey": "Twitter Consumer Key Here",
+    "csecret": "Twitter Consumer Secret Here",
+    "atkey": "Twitter Access Token Key Here",
+    "atsecret": "Twitter Access Secret Here",
+    "webhookname": "Webhook name here",
+    "webhookimgurl": "https://cdn.discordapp.com/emojis/406897389472055307.png"
 }
