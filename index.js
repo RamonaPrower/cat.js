@@ -4,9 +4,10 @@ const { Cat } = require('./utils/cat');
 const { AwaitHandler } = require('./utils/await');
 const mongoose = require('mongoose');
 const { Channel } = require('./models/channel');
-const moment = require('moment');
 const client = new Discord.Client;
 let globalCat;
+const { GuildSettings } = require('./utils/guild');
+const guildSettings = new GuildSettings;
 const commandList = require('./commands/command');
 
 // this is just a bunch of including the commands
@@ -17,22 +18,21 @@ const commandList = require('./commands/command');
 client.admin = new Discord.Collection();
 const adminComms = commandList.admin;
 for (const file of adminComms) {
-	client.admin.set(file.tag, file);
+	client.admin.set(file.settings.regexp, file);
 }
 
 client.commands = new Discord.Collection();
 const commandsComms = commandList.commands;
 for (const file of commandsComms) {
-	client.commands.set(file.tag, file);
+	client.commands.set(file.settings.regexp, file);
 }
 
 client.triggers = new Discord.Collection();
 const triggerFiles = commandList.triggers;
 for (const file of triggerFiles) {
-	client.triggers.set(file.tag, file);
+	client.triggers.set(file.settings.regexp, file);
 }
 
-const guildUpdate = new Discord.Collection();
 const awaitHandler = new AwaitHandler();
 
 client.on('ready', () => {
@@ -58,14 +58,21 @@ client.on('message', async message => {
 	if (message.author.bot) return;
 	let newReg;
 	const mentioned = message.isMentioned(client.user);
+	const thisGuildSettings = await guildSettings.getSettings(message.guild.id);
 
 	// pre-verification admin/info ops
 	if (mentioned === true) {
-		for (const key of client.admin) {
-			newReg = new RegExp(key[1].regexp, 'gm');
+		for (const [key, value] of client.admin) {
+			newReg = new RegExp(key, 'gm');
 			if (newReg.test(message.content)) {
-				console.log('found ' + key[1].info.name);
-				key[1].execute(message, globalCat);
+				console.log('found ' + value.info.name);
+				if (value.settings.guildSettings) {
+					value.execute(message, guildSettings);
+					return;
+				}
+				else {
+					value.execute(message, globalCat);
+				}
 				return;
 			}
 		}
@@ -77,59 +84,40 @@ client.on('message', async message => {
 		console.log('channel not allowed');
 		return;
 	}
-	const guildId = message.guild.id;
-	const timeNow = new Date();
 	// we store a guild and last updated time in memory to save on DB updates
 	// if these aren't 100% accurate, it's not the end of the world
 	// i might update this to users, but i'm not all that big on it right now
-	if (guildUpdate.has(guildId)) {
-		const guildUpdateTime = guildUpdate.get(guildId);
-		const diff = moment().diff(guildUpdateTime, 'hours');
-		if (diff === 0) {
-			console.log('no update needed');
-		}
-		// do update stuff when i build the command
-		else {
-		console.log('update time');
-		guildUpdate.set(guildId, timeNow);
-		}
-
-	}
-	else {
-		console.log('created Guild in volmem');
-		guildUpdate.set(guildId, timeNow);
-	}
 	// post-verification
 	if (mentioned === true) {
-		for (const key of client.commands) {
-			newReg = new RegExp(key[1].regexp, 'gmi');
+		for (const [key, value] of client.commands) {
+			newReg = new RegExp(key, 'gmi');
 			if (newReg.test(message.content)) {
-				console.log('found ' + key[1].info.name);
-				guildUpdate.set(message.guild.id, new Date());
-				if (key[1].await) {
-					key[1].execute(message, awaitHandler);
+				console.log('found ' + value.info.name);
+				if (!value.settings.sim || value.settings.sim === true && thisGuildSettings.sim === true) {
+					if (value.settings.await) {
+						value.execute(message, awaitHandler);
+					}
+					else {
+						value.execute(message, globalCat);
+					}
 				}
-				else {
-					key[1].execute(message, globalCat);
-				}
-
 				return;
 			}
 		}
 	}
 	const dice = 1;
 	// const dice = Math.floor((Math.random() * 100) + 1);
-	for (const key of client.triggers) {
-		newReg = new RegExp(key[1].regexp, key[1].flags);
-		if (newReg.test(message.content) && dice <= key[1].chance) {
-			console.log('found ' + key[1].info.name);
-			if (key[1].await) {
+	for (const [key, value] of client.triggers) {
+		newReg = new RegExp(key, value.settings.flags);
+		if (newReg.test(message.content) && dice <= value.settings.chance) {
+			console.log('found ' + value.info.name);
+			if (value.settings.await) {
 				if (awaitHandler.isPaused(message.channel.id) === false) {
-					key[1].execute(message, awaitHandler);
+					value.execute(message, awaitHandler);
 				}
 			}
 			else {
-				key[1].execute(message, globalCat);
+				value.execute(message, globalCat);
 			}
 			return;
 		}

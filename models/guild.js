@@ -20,6 +20,16 @@ const guildSchema = new mongoose.Schema({
         required: true,
         default: Date.now,
     },
+    enableSim: {
+        type: Boolean,
+        required: true,
+        default: true,
+    },
+    enableTwitter: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
 });
 guildSchema.statics.checkGuild = async function(snowflake) {
     return this.findOne({

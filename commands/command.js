@@ -5,8 +5,9 @@
 
 const bed = require('./admin/bed');
 const info = require('./admin/info');
+const toggle = require('./admin/toggle');
 
-module.exports.admin = [bed, info];
+module.exports.admin = [bed, info, toggle];
 
 const asleep = require('./commands/asleep');
 const feed = require('./commands/feed');

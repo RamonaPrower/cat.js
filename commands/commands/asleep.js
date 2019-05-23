@@ -14,5 +14,8 @@ module.exports.info = {
 	description: 'Finding out if the cat is asleep',
 	summon: 'asleep',
 };
-module.exports.regexp = 'asleep';
-module.exports.tag = 'asleep';
+module.exports.settings = {
+	regexp: 'asleep',
+	tag: 'asleep',
+	sim: true,
+};

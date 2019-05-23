@@ -14,5 +14,8 @@ module.exports.info = {
 	description: 'Cats Guild-wide hunger',
 	summon: 'Hunger',
 };
-module.exports.regexp = 'hunger';
-module.exports.tag = 'hunger';
+module.exports.settings = {
+	regexp: 'hunger',
+	tag: 'hunger',
+	sim: true,
+};

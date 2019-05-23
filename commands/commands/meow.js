@@ -13,5 +13,8 @@ module.exports.info = {
 	description: 'meow',
 	summon: 'meow',
 };
-module.exports.regexp = 'meow';
-module.exports.tag = 'meow';
+module.exports.settings = {
+	regexp: 'meow',
+	tag: 'meow',
+	sim: true,
+};

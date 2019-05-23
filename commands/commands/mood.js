@@ -14,5 +14,8 @@ module.exports.info = {
 	description: 'Cats Mood',
 	summon: 'mood',
 };
-module.exports.regexp = 'mood';
-module.exports.tag = 'mood';
+module.exports.settings = {
+	regexp: 'mood',
+	tag: 'mood',
+	sim: true,
+};

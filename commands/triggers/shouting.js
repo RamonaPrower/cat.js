@@ -32,8 +32,10 @@ module.exports.info = {
 	description: 'Reacts when there\'s shouting on the server',
 	summon: 'CAPS LOCK',
 };
-module.exports.regexp = '^(?=[^a-z]*$)[A-Z].*[A-Z]$';
-module.exports.flags = 'gm';
-module.exports.chance = 3;
-module.exports.await = true;
-module.exports.tag = 'shout';
+module.exports.settings = {
+	regexp: '^(?=[^a-z]*$)[A-Z].*[A-Z]$',
+	flags: 'gm',
+	tag: 'shout',
+	chance: 3,
+	await: true,
+};

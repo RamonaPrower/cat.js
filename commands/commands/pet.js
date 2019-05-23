@@ -13,5 +13,8 @@ module.exports.info = {
 	description: 'pet the cat',
 	summon: 'pet',
 };
-module.exports.regexp = 'pet';
-module.exports.tag = 'pet_cat';
+module.exports.settings = {
+	regexp: 'pet',
+	tag: 'pet_cat',
+	sim: true,
+};

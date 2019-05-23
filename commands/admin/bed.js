@@ -3,7 +3,6 @@ const { Channel } = require('../../models/channel');
 // exports
 module.exports = {
 	async execute(message) {
-		console.log('summoned! ' + this.info.name);
 		const channelID = message.channel.id;
 		const search = await Channel.checkChannel(channelID);
 		if (search) {
@@ -25,5 +24,7 @@ module.exports.info = {
 	description: 'Put a bed down to allow the cat to post in a channel',
 	summon: 'Mention user and "place bed"',
 };
-module.exports.regexp = 'place bed';
-module.exports.tag = 'place_bed';
+module.exports.settings = {
+	regexp: 'place bed',
+	tag: 'place_bed',
+};

@@ -13,5 +13,7 @@ module.exports.info = {
 	description: 'Cats info',
 	summon: 'info',
 };
-module.exports.regexp = 'info';
-module.exports.tag = 'info';
+module.exports.settings = {
+	regexp: 'info',
+	tag: 'info',
+};

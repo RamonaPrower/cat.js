@@ -36,6 +36,9 @@ module.exports.info = {
 	description: 'Feed the Cat',
 	summon: 'feed',
 };
-module.exports.await = true;
-module.exports.regexp = 'feed';
-module.exports.tag = 'feed';
+module.exports.settings = {
+	regexp: 'feed',
+	tag: 'feed',
+	sim: true,
+	await: true,
+};
