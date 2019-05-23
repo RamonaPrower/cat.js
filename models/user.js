@@ -29,6 +29,9 @@ userSchema.statics.checkUser = async function(snowflake) {
 // userSchema.methods.update = function() {
 
 // }
+/**
+ * Handles the positive interactions of the bot
+ */
 userSchema.methods.positive = function() {
 	const timeNow = new Date();
 	const diff = moment().diff(this.lastReset, 'days');

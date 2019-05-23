@@ -1,10 +1,21 @@
 const Discord = require('discord.js');
 const { Guild } = require('../models/guild');
 
+/**
+ * The Settings Handler of each Guild
+ * This stores the settings in memory to save on DB queries
+ * @constructor
+ * @author Ramona Prower
+ * @this {GuildSettings}
+ */
 class GuildSettings {
     constructor() {
         this.guilds = new Discord.Collection();
     }
+    /**
+     * Gets the settings of the guild supplied, via ID
+     * @param {Snowflake} guildId The Guild ID
+     */
     async getSettings(guildId) {
         if (this.guilds.get(guildId)) {
             return this.guilds.get(guildId);
@@ -26,6 +37,10 @@ class GuildSettings {
             return this.guilds.get(guildId);
         }
     }
+    /**
+     * Toggles the Sim Setting on the server
+     * @param {Snowflake} guildId The Guild ID
+     */
     async toggleSim(guildId) {
             const search = await Guild.checkGuild(guildId);
             if (search.enableSim === true) {
@@ -41,6 +56,10 @@ class GuildSettings {
             });
             return this.guilds.get(guildId);
         }
+        /**
+         * Toggles the Twitter support on the server
+         * @param {Snowflake} guildId The guild ID
+         */
     async toggleTwitter(guildId) {
         const search = await Guild.checkGuild(guildId);
         if (search.enableTwitter === true) {

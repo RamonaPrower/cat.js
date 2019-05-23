@@ -36,6 +36,6 @@ module.exports.settings = {
 	regexp: '^(?=[^a-z]*$)[A-Z].*[A-Z]$',
 	flags: 'gm',
 	tag: 'shout',
-	chance: 3,
+	chance: 5,
 	await: true,
 };

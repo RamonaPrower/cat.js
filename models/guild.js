@@ -36,7 +36,9 @@ guildSchema.statics.checkGuild = async function(snowflake) {
         snowflake: snowflake,
     });
 };
-
+/**
+ * sends a ping to update the db, if it's needed
+ */
 guildSchema.methods.update = function() {
     const timeNow = new Date();
     const diff = moment().diff(this.lastUpdate, 'hours');

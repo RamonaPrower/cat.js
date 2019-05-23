@@ -59,77 +59,6 @@ class UserCat extends Cat {
 		}
 		return new UserCat(search);
 	}
-	/**
-	 * Gets a reaction to a user doing something to the cat
-	 * @param {number} globalMood This is the Global Mood of the GlobalCat
-	 * @param {string} action This is the action that you want to do (currently 'pet' and 'meow')
-	 */
-	getReaction(globalMood, action) {
-		const dice = Math.floor((Math.random() * 100) + 1);
-		let overallMood = globalMood + this.user.happiness;
-		let foundAction;
-		if (action === 'pet') {
-			foundAction = strings.pet;
-		}
-		else if (action === 'meow') {
-			foundAction = strings.meow;
-		}
-		else {return new Error('invalid action');}
-		function rand(i) {
-			return Math.floor(Math.random() * i);
-		}
-		const happyArr = foundAction.happy;
-		const neutralArr = foundAction.neutral;
-		const sadArr = foundAction.sad;
-		const happyStr = happyArr[rand(happyArr.length)];
-		const neutralStr = neutralArr[rand(neutralArr.length)];
-		const sadStr = sadArr[rand(sadArr.length)];
-
-		if (globalMood <= 2) {
-			overallMood--;
-			overallMood--;
-		}
-		if (globalMood > 8) {
-			overallMood++;
-			overallMood++;
-		}
-		if (overallMood <= 0) {
-			return sadStr;
-		}
-		if (overallMood <= 3) {
-			if (dice <= 25) {
-				return sadStr;
-			}
-			else if (dice <= 66) {
-				this.user.positive();
-				return neutralStr;
-			}
-			else {
-				this.user.positive();
-				return happyStr;
-			}
-		}
-		if (overallMood <= 7) {
-			if (dice <= 66) {
-				this.user.positive();
-				return neutralStr;
-			}
-			else {
-				this.user.positive();
-				return happyStr;
-			}
-		}
-		if (overallMood >= 20) {
-			if (dice <= 90) {
-				this.user.positive();
-				return '<:catlove:575816294113476608>';
-			}
-		}
-		else {
-			this.user.positive();
-			return happyStr;
-		}
-	}
 }
 /**
  * Creates a new Guild Cat
@@ -319,42 +248,6 @@ class GuildUserCat extends Cat {
 		else {
 			this.user.positive();
 			return happyStr;
-		}
-	}
-	/**
-	 * Gets the Hunger of the cat after construction
-	 * @returns {string} the mood, as an emoji string
-	 */
-	getHunger() {
-		function rand(i) {
-			return Math.floor(Math.random() * i);
-		}
-		const hungryArr = strings.hunger.yes;
-		const notHungryArr = strings.hunger.no;
-		const hungryStr = hungryArr[rand(hungryArr.length)];
-		const notHungryStr = notHungryArr[rand(notHungryArr.length)];
-		if (this.guild.hunger <= 4) return hungryStr;
-		else return notHungryStr;
-	}
-	/**
-	 * Feeds the cat
-	 * @returns {string} the mood, as an emoji string
-	 */
-	feed() {
-		function rand(i) {
-			return Math.floor(Math.random() * i);
-		}
-		const notHungryArr = strings.hunger.no;
-		const notHungryStr = notHungryArr[rand(notHungryArr.length)];
-		const fedArr = strings.fed;
-		const fedStr = fedArr[rand(fedArr.length)];
-		if (this.guild.hunger >= 4) {
-			return notHungryStr;
-		}
-		else {
-			this.guild.feed();
-			this.user.positive();
-			return fedStr;
 		}
 	}
 }

@@ -19,9 +19,9 @@ module.exports = {
 };
 
 module.exports.info = {
-	name: 'Example',
-	description: 'Layout format for Commands',
-	summon: 'N/A',
+	name: 'Toggle',
+	description: 'Toggle Settings on  a per-guild basis',
+	summon: 'toggle',
 };
 module.exports.settings = {
 	regexp: 'toggle',
