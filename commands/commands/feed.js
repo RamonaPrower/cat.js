@@ -23,7 +23,6 @@ module.exports = {
 			})
 			.catch(() => {
 				awaitHandler.release(message.channel.id);
-				console.log('nothing');
 			});
 		}
 	});

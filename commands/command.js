@@ -19,10 +19,12 @@ const play = require('./commands/play');
 
 module.exports.commands = [asleep, feed, hunger, meowComm, mood, pet, play];
 
+const bork = require('./triggers/bork');
+const catFace = require('./triggers/catface');
 const meowTrigg = require('./triggers/meow');
 const shouting = require('./triggers/shouting');
 
-module.exports.triggers = [meowTrigg, shouting];
+module.exports.triggers = [bork, catFace, meowTrigg, shouting];
 
 const twitter = require('./twitter/twitter');
 
