@@ -31,8 +31,8 @@ async function webhookOrMessage(images, message) {
         await sendViaHook(images, message, sendHook);
 
     }
-    else if (hook.size === 0 && message.guild.me.hasPermission('MANAGE_WEBHOOKS')) {
-        const sendHook = await message.channel.createWebhook(config.webhookname);
+    else if (!hook.find('name', config.webhookname) && message.guild.me.hasPermission('MANAGE_WEBHOOKS')) {
+        const sendHook = await message.channel.createWebhook(config.webhookname, './images/twitter.png');
         await sendViaHook(images, message, sendHook);
     }
     else {
