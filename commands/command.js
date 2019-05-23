@@ -3,11 +3,16 @@
 // this is on her
 // this also makes the game easier as i can add the file for both collections needed
 
-const bed = require('./admin/bed');
+
+/**
+ * // const bed = require('./admin/bed');
+ * removing the bed commands for now, it feels redundant when permissions can control where the cat goes anyway
+ */
+
 const info = require('./admin/info');
 const toggle = require('./admin/toggle');
 
-module.exports.admin = [bed, info, toggle];
+module.exports.admin = [info, toggle];
 
 const asleep = require('./commands/asleep');
 const feed = require('./commands/feed');

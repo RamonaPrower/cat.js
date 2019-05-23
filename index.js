@@ -3,7 +3,6 @@ const config = require('./config.json');
 const { Cat } = require('./utils/cat');
 const { AwaitHandler } = require('./utils/await');
 const mongoose = require('mongoose');
-const { Channel } = require('./models/channel');
 const client = new Discord.Client;
 let globalCat;
 const { GuildSettings } = require('./utils/guild');
@@ -77,13 +76,6 @@ client.on('message', async message => {
 				return;
 			}
 		}
-	}
-
-	// channel + guild verification
-	const search = await Channel.checkChannel(message.channel.id);
-	if (!search) {
-		console.log('channel not allowed');
-		return;
 	}
 	// we store a guild and last updated time in memory to save on DB updates
 	// if these aren't 100% accurate, it's not the end of the world
