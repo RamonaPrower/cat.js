@@ -47,39 +47,39 @@
     -play
         (TBC)
 ### Triggers
-    -blobcat
-        -used by: everyone
-        -summon: blobcat emoji
-        -info: responds to the blobcat emoji
-        -chance: 5%
-    -bork
-        -used by: everyone
-        -summon: bork, byork
-        -info: responds to dog sounds
-        -chance: 5%
-    -catface
-        -used by: everyone
-        -summon: :3c
-        -info: responds to cat face
-        -chance: 5%
-    -meow
-        -used by: everyone
-        -summon: the long ass regexp in the file
-        -info: this will respond to normal cat sounds, and also silently listens for someone to greet the cat, which improves standing with the cat (this will still respond but not actually do anything on non-sim servers)
-        -chance: 5%
-    -owo
-        -used by: everyone
-        -summon: owo or uwu
-        -info: responds with a owo face
-        -chance: 5%
-    -shouting
-        -used by: everyone
-        -summon: LOUD CAPS LOCK IN THE WHOLE MESSAGE
-        -info: gets scared by loud noises, silently listens for consolment (it's ok, poor cat, etc)
-        -chance: 5%
+-blobcat
+  -used by: everyone
+  -summon: blobcat emoji
+  -info: responds to the blobcat emoji
+  -chance: 5%
+-bork
+  -used by: everyone
+  -summon: bork, byork
+  -info: responds to dog sounds
+  -chance: 5%
+-catface
+  -used by: everyone
+  -summon: :3c
+  -info: responds to cat face
+  -chance: 5%
+-meow
+  -used by: everyone
+  -summon: the long ass regexp in the file
+  -info: this will respond to normal cat sounds, and also silently listens for someone to greet the cat, which improves standing with the cat (this will still respond but not actually do anything on non-sim servers)
+  -chance: 5%
+-owo
+  -used by: everyone
+  -summon: owo or uwu
+  -info: responds with a owo face
+  -chance: 5%
+-shouting
+  -used by: everyone
+  -summon: LOUD CAPS LOCK IN THE WHOLE MESSAGE
+  -info: gets scared by loud noises, silently listens for consolment (it's ok, poor cat, etc)
+  -chance: 5%
 ### Twitter for discord
-    -Twitter for discord
-        -used by: everyone
-        -summon: twitter links
-        -info: auto-gets the next image from a twitter embed (i'll update to work exactly like goodboy.py at some point)
-        -twitter setting needed: true
+-Twitter for discord
+  -used by: everyone
+  -summon: twitter links
+  -info: auto-gets the next image from a twitter embed (i'll update to work exactly like goodboy.py at some point)
+  -twitter setting needed: true
