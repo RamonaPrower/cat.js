@@ -21,11 +21,9 @@ module.exports = {
 			userCat.user.positive();
 			message.channel.send(strings.meow.happy[Math.floor(Math.random() * strings.meow.happy.length)]);
 			setTimeout(() => {awaitHandler.release(message.channel.id);}, 1000);
-			console.log('user positive action');
 		})
 		.catch(() => {
 			setTimeout(() => {awaitHandler.release(message.channel.id);}, 1000);
-			console.log('no resp');
 		});
 	});
 	},

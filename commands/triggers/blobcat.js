@@ -1,6 +1,6 @@
 module.exports = {
 	async execute(message) {
-	message.channel.send('<a:shifty:403042127522562060>');
+	message.channel.send('<:catblobheart:405242612681801739>');
 	},
 };
 

@@ -44,10 +44,11 @@ async function webhookOrMessage(images, message) {
 }
 
 async function sendViaHook(images, message, hook) {
+    const data = [];
     for (const imageUrl of images) {
-        const attachment = new Discord.Attachment(imageUrl.media_url);
-        await hook.send(attachment);
+        data.push(imageUrl.media_url);
     }
+    await hook.send(data);
 }
 
 module.exports.info = {

@@ -13,7 +13,7 @@ module.exports = {
             message.author.send(`Settings for ${message.guild.name} is now, Cat Sim is ${settings.sim === true ? 'ON' : 'OFF'}, Twitter Linking is ${settings.twitter === true ? 'ON' : 'OFF'}`);
         }
         else {
-            console.log('Could not run, not mod?');
+            console.log(`${message.member.user.tag} tried to use an admin command, but doesn't have permission`);
         }
 	},
 };

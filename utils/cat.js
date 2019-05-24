@@ -188,7 +188,10 @@ class GuildUserCat extends Cat {
 		else if (action === 'meow') {
 			foundAction = strings.meow;
 		}
-		else {return new Error('invalid action');}
+		else {
+			console.log('getReaction passed with improper command');
+			console.log('this should never happen');
+		}
 		function rand(i) {
 			return Math.floor(Math.random() * i);
 		}

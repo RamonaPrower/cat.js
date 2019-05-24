@@ -45,7 +45,7 @@ client.on('ready', () => {
 	const db = config.db;
 	mongoose.connect(db, { useNewUrlParser: true })
 		.then(() => {
-			console.log(`connected Succesfully to ${db}`);
+			console.log('connected Succesfully to Database');
 		})
 		.catch(console.error);
 	globalCat = new Cat();
@@ -70,7 +70,7 @@ client.on('message', async message => {
 		for (const [key, value] of client.admin) {
 			newReg = new RegExp(key, 'gm');
 			if (newReg.test(message.content)) {
-				console.log('found ' + value.info.name);
+				// console.log('found ' + value.info.name);
 				if (value.settings.guildSettings) {
 					value.execute(message, guildSettings);
 				}
@@ -89,7 +89,7 @@ client.on('message', async message => {
 		for (const [key, value] of client.commands) {
 			newReg = new RegExp(key, 'gmi');
 			if (newReg.test(message.content)) {
-				console.log('found ' + value.info.name);
+				// console.log('found ' + value.info.name);
 				if (!value.settings.sim || value.settings.sim === true && thisGuildSettings.sim === true) {
 					if (value.settings.await) {
 						value.execute(message, awaitHandler);
@@ -109,7 +109,7 @@ client.on('message', async message => {
 	for (const [key, value] of client.triggers) {
 		newReg = new RegExp(key, value.settings.flags);
 		if (newReg.test(message.content) && dice <= value.settings.chance) {
-			console.log('found ' + value.info.name);
+			// console.log('found ' + value.info.name);
 			if (value.settings.await) {
 				if (awaitHandler.isPaused(message.channel.id) === false) {
 					value.execute(message, awaitHandler);
@@ -125,7 +125,7 @@ client.on('message', async message => {
 	if (thisGuildSettings.twitter === true) {
 		newReg = new RegExp(/https?:\/\/(?:mobile\.)?twitter\.com\/(?:#!\/)?(?:\w+)\/status(?:es)?\/(\d+)/, 'gmi');
 		if (newReg.test(message.content)) {
-			console.log('twitter link found');
+			// console.log('twitter link found');
 			commandList.twitter.execute(message);
 			return;
 		}

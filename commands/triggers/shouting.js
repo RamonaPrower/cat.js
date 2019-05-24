@@ -21,7 +21,6 @@ module.exports = {
 		})
 		.catch(() => {
 			setTimeout(() => {awaitHandler.release(message.channel.id);}, 1000);
-			console.log('no-one consoled the cat');
 		});
 	});
 	},

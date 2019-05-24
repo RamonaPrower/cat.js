@@ -13,7 +13,7 @@ class AwaitHandler {
      */
     add(channelId) {
         if (this.list.find(i => i === channelId)) {
-            console.log('Already in handler');
+            return;
         }
         else {
             this.list.push(channelId);

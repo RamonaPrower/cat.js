@@ -4,6 +4,7 @@ const strings = require('../../strings/cat.json');
 module.exports = {
 	execute(message) {
 		message.channel.send(strings.info, { split: true });
+		message.channel.send('<:meowuwu:575816294280986625>');
 	},
 };
 
