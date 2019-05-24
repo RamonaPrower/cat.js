@@ -32,7 +32,7 @@ module.exports.info = {
 	summon: 'CAPS LOCK',
 };
 module.exports.settings = {
-	regexp: '^(?=[^a-z]*$)[A-Z].*[A-Z]$',
+	regexp: '^(?=[^a-z]*$)[A-Z].{14,}[A-Z]$',
 	flags: 'gm',
 	tag: 'shout',
 	chance: 5,

@@ -48,7 +48,7 @@
   * sim: true
   * info: petting the cat, whilst it's in a good mood makes it happier with you, and it'll react poorly if it's in a bad mood, or if it doesn't like you a lot.
 #### Play
-        (TBC)
+  * Soon™
 ### Triggers
 #### Blobcat
   * used by: everyone

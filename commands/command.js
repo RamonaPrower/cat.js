@@ -11,8 +11,9 @@
 
 const info = require('./admin/info');
 const toggle = require('./admin/toggle');
+const moms = require('./admin/moms');
 
-module.exports.admin = [info, toggle];
+module.exports.admin = [info, toggle, moms];
 
 const asleep = require('./commands/asleep');
 const feed = require('./commands/feed');
