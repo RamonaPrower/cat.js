@@ -20,11 +20,11 @@ module.exports = {
 			const userCat = await UserCat.create(userMessage.author.id);
 			userCat.user.positive();
 			message.channel.send(strings.meow.happy[Math.floor(Math.random() * strings.meow.happy.length)]);
-			awaitHandler.release(message.channel.id);
+			setTimeout(() => {awaitHandler.release(message.channel.id);}, 1000);
 			console.log('user positive action');
 		})
 		.catch(() => {
-			awaitHandler.release(message.channel.id);
+			setTimeout(() => {awaitHandler.release(message.channel.id);}, 1000);
 			console.log('no resp');
 		});
 	});

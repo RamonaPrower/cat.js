@@ -36,3 +36,7 @@ module.exports.triggers = [blobcat, bork, catFace, meowTrigg, owo, shouting];
 const twitter = require('./twitter/twitter');
 
 module.exports.twitter = twitter;
+
+const noSimPet = require('./special/pet');
+
+module.exports.special = [noSimPet];

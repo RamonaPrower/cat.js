@@ -32,6 +32,11 @@ for (const file of triggerFiles) {
 	client.triggers.set(file.settings.regexp, file);
 }
 
+client.special = new Discord.Collection();
+const specialFiles = commandList.special;
+for (const file of specialFiles) {
+	client.special.set(file.settings.tag, file);
+}
 
 const awaitHandler = new AwaitHandler();
 
@@ -68,7 +73,6 @@ client.on('message', async message => {
 				console.log('found ' + value.info.name);
 				if (value.settings.guildSettings) {
 					value.execute(message, guildSettings);
-					return;
 				}
 				else {
 					value.execute(message, globalCat);
@@ -89,9 +93,11 @@ client.on('message', async message => {
 				if (!value.settings.sim || value.settings.sim === true && thisGuildSettings.sim === true) {
 					if (value.settings.await) {
 						value.execute(message, awaitHandler);
+						return;
 					}
 					else {
 						value.execute(message, globalCat);
+						return;
 					}
 				}
 				return;
@@ -107,6 +113,7 @@ client.on('message', async message => {
 			if (value.settings.await) {
 				if (awaitHandler.isPaused(message.channel.id) === false) {
 					value.execute(message, awaitHandler);
+					return;
 				}
 			}
 			else {
@@ -120,6 +127,15 @@ client.on('message', async message => {
 		if (newReg.test(message.content)) {
 			console.log('twitter link found');
 			commandList.twitter.execute(message);
+			return;
+		}
+	}
+	if (mentioned === true && message.content === `<@${client.user.id}>`) {
+		if (thisGuildSettings.sim === true) {
+			client.commands.get('meow').execute(message, globalCat);
+		}
+		else {
+			client.special.get('meow').execute(message);
 		}
 	}
 });

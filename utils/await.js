@@ -25,9 +25,7 @@ class AwaitHandler {
      * @param {Snowflake} channelId the Channel ID of the channel that has finished waiting
      */
     release(channelId) {
-        setTimeout(function() {
-            _.pull(this.list, channelId);
-        }, 1000);
+        _.pull(this.list, channelId);
     }
     /**
      * Checks if a channel is paused

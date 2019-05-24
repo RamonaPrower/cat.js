@@ -19,10 +19,10 @@ module.exports = {
 			message.channel.awaitMessages(badfood, { maxMatches: 1, time: 15000, errors: ['time'] })
 			.then(() => {
 				message.channel.send(strings.badfoodstring);
-				awaitHandler.release(message.channel.id);
+				setTimeout(() => {awaitHandler.release(message.channel.id);}, 1000);
 			})
 			.catch(() => {
-				awaitHandler.release(message.channel.id);
+				setTimeout(() => {awaitHandler.release(message.channel.id);}, 1000);
 			});
 		}
 	});

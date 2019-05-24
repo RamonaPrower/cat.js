@@ -16,11 +16,11 @@ module.exports = {
 		awaitHandler.add(message.channel.id);
 		message.channel.awaitMessages(calming, { maxMatches: 1, time: 15000, errors: ['time'] })
 		.then(() => {
-			awaitHandler.release(message.channel.id);
+			setTimeout(() => {awaitHandler.release(message.channel.id);}, 1000);
 			message.channel.send(strings.calmemojis[Math.floor(Math.random() * strings.calmemojis.length)]);
 		})
 		.catch(() => {
-			awaitHandler.release(message.channel.id);
+			setTimeout(() => {awaitHandler.release(message.channel.id);}, 1000);
 			console.log('no-one consoled the cat');
 		});
 	});
