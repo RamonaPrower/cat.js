@@ -130,12 +130,14 @@ client.on('message', async message => {
 			return;
 		}
 	}
-	if (mentioned === true && message.content == `<@!${client.user.id}>` || mentioned === true && message.content == `<@${client.user.id}>`) {
+	if (mentioned === true) {
 		if (thisGuildSettings.sim === true) {
 			client.commands.get('pet').execute(message, globalCat);
+			return;
 		}
 		else {
 			client.special.get('pet_cat').execute(message);
+			return;
 		}
 	}
 });
