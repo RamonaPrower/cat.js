@@ -1,7 +1,7 @@
 {
     "discord": "discord API key",
     "db": "db url",
-    "inviteLink": "https://discordapp.com/api/oauth2/authorize?client_id=**ADD ID HERE**scope=bot&permissions=100352",
+    "inviteLink": "https://discordapp.com/api/oauth2/authorize?client_id=**ADD ID HERE**scope=bot&permissions=537249792",
     "ckey": "Twitter Consumer Key Here",
     "csecret": "Twitter Consumer Secret Here",
     "atkey": "Twitter Access Token Key Here",
