@@ -19,7 +19,7 @@
     "shout": ["<:meowyikes:580076064152485912>", "<:meowterrified:580076064051822592>"],
     "catsounds": ["<:meowuwu:575816294280986625>", "<:meowsquee:575816294042042375>", "<:meowsmile:575816294507741184>", "<:meowhello:575816294646022145>", "<:cathappy:575567233254948865>", "<:meowbigsmile:575818640616587278>", "<:meowamused:575818640083910677>", "<:meowmelt:575818640000024597>", "meow", "meoooow", "mrow!", "meow!", "meoooooow!", "miaou!", "mrrrr", "miau!", "nyan~", "mlem <:blobcatmlem:405521865268789251>", "purrr~ <:blobcathappy:406260483960733696>"],
     "calmphrases": ["^it's ok", "^don't worry", "^pet pat", "^poor cat"],
-    "calmemojis": ["<:pethappy:575816294054756382>", "<:meowhmph:575816294390038539>"],
+    "calmemojis": ["<:pethappy:575816294054756382>", "<:petsad:575816294251757579>"],
     "badfood": ["cat piss"],
     "badfoodstring": ["<:meowsipglare:580135721160146975>"],
     "welcome": ["^hello", "^hi", "^henlo", "^heya", "^hoi"]

@@ -132,10 +132,10 @@ client.on('message', async message => {
 	}
 	if (mentioned === true && message.content === `<@${client.user.id}>`) {
 		if (thisGuildSettings.sim === true) {
-			client.commands.get('meow').execute(message, globalCat);
+			client.commands.get('pet').execute(message, globalCat);
 		}
 		else {
-			client.special.get('meow').execute(message);
+			client.special.get('pet_cat').execute(message);
 		}
 	}
 });

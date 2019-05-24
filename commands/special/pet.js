@@ -3,9 +3,9 @@ const strings = require('../../strings/cat.json');
 // exports
 module.exports = {
 	async execute(message) {
-        const coin = Math.round(Math.random);
+        const coin = Math.round(Math.random());
         if (coin === 0) {
-            message.channel.send(strings.pet.angry[0]);
+            message.channel.send(strings.pet.sad[0]);
         }
         else {
             message.channel.send(strings.pet.happy[0]);
