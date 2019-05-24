@@ -104,8 +104,8 @@ client.on('message', async message => {
 			}
 		}
 	}
-	const dice = 1;
-	// const dice = Math.floor((Math.random() * 100) + 1);
+	// const dice = 1;
+	const dice = Math.floor((Math.random() * 100) + 1);
 	for (const [key, value] of client.triggers) {
 		newReg = new RegExp(key, value.settings.flags);
 		if (newReg.test(message.content) && dice <= value.settings.chance) {
@@ -123,14 +123,14 @@ client.on('message', async message => {
 		}
 	}
 	if (thisGuildSettings.twitter === true) {
-		newReg = new RegExp(/https?:\/\/(?:mobile\.)?twitter\.com\/(?:#!\/)?(?:\w+)\/status(?:es)?\/(\d+)/, 'gmi');
+		newReg = /(?<!\|\|)(?<!<)https?:\/\/(?:mobile\.)?twitter\.com\/(?:#!\/)?(?:\w+)\/status(?:es)?\/(\d+)/gmi;
 		if (newReg.test(message.content)) {
 			// console.log('twitter link found');
 			commandList.twitter.execute(message);
 			return;
 		}
 	}
-	if (mentioned === true && message.content === `<@${client.user.id}>`) {
+	if (mentioned === true && message.content == `<@!${client.user.id}>` || mentioned === true && message.content == `<@${client.user.id}>`) {
 		if (thisGuildSettings.sim === true) {
 			client.commands.get('pet').execute(message, globalCat);
 		}
