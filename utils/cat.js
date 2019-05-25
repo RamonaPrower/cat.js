@@ -116,7 +116,7 @@ class GuildCat extends Cat {
 		const notHungryStr = notHungryArr[rand(notHungryArr.length)];
 		const fedArr = strings.fed;
 		const fedStr = fedArr[rand(fedArr.length)];
-		if (this.hunger >= 4) {
+		if (this.hunger > 4) {
 			return notHungryStr;
 		}
 		else {
