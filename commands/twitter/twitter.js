@@ -19,6 +19,9 @@ module.exports = {
                     webhookOrMessage(tweets.extended_entities.media.slice(1), message);
                 }
             }
+            if (error) {
+                console.log(error);
+            }
         });
     },
 
