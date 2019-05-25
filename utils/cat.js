@@ -176,7 +176,7 @@ class GuildUserCat extends Cat {
 	/**
 	 * Gets a reaction to a user doing something to the cat
 	 * @param {number} globalMood This is the Global Mood of the GlobalCat
-	 * @param {string} action This is the action that you want to do (currently 'pet' and 'meow')
+	 * @param {string} action This is the action that you want to do (currently 'pet', 'meow' and 'mood')
 	 */
 	getReaction(globalMood, action) {
 		const dice = Math.floor((Math.random() * 100) + 1);
@@ -186,6 +186,9 @@ class GuildUserCat extends Cat {
 			foundAction = strings.pet;
 		}
 		else if (action === 'meow') {
+			foundAction = strings.meow;
+		}
+		else if (action === 'mood') {
 			foundAction = strings.meow;
 		}
 		else {
@@ -208,6 +211,11 @@ class GuildUserCat extends Cat {
 
 		if (this.guild.hunger <= 4) return hungryStr;
 		if (this.guild.asleep === true && this.user.happiness <= 8) return asleepStr;
+		if (action === 'mood') {
+			if (globalMood <= 3) {return strings.meow.sad[Math.floor(Math.random() * strings.meow.sad.length)];}
+			else if (globalMood <= 6) {return strings.meow.neutral[Math.floor(Math.random() * strings.meow.neutral.length)];}
+			else {return strings.meow.happy[Math.floor(Math.random() * strings.meow.happy.length)];}
+		}
 		if (globalMood <= 2) {
 			overallMood--;
 			overallMood--;
@@ -232,7 +240,7 @@ class GuildUserCat extends Cat {
 				return happyStr;
 			}
 		}
-		if (overallMood <= 7) {
+		if (overallMood <= 6) {
 			if (dice <= 66) {
 				this.user.positive();
 				return neutralStr;

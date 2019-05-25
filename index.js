@@ -149,3 +149,5 @@ client.on('error', data => {
 client.login(config.token)
 	.then(console.log('Logged In'))
 	.catch(console.error);
+
+process.on('unhandledRejection', error => console.error('Uncaught Promise Rejection', error));
