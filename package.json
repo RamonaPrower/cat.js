@@ -1,6 +1,6 @@
 {
   "name": "meow",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Meow - A Discord cat Tamagotchi",
   "main": "index.js",
   "private": true,

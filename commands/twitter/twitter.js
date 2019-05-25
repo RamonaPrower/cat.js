@@ -11,8 +11,10 @@ module.exports = {
                 access_token_key: config.atkey,
                 access_token_secret: config.atsecret,
         });
-        const splitMessage = message.content.split('/');
-        tclient.get('statuses/show', { id: splitMessage[splitMessage.length - 1], tweet_mode: 'extended' }, async function(error, tweets) {
+        const newReg = /(?<!\|\|)(?<!<)https?:\/\/(?:mobile\.)?twitter\.com\/(?:#!\/)?(?:\w+)\/status(?:es)?\/(\d+)/gmi
+        const match = newReg.exec(message.content);
+        if (!match[1]) {return console.log('i could\'nt find a match')}
+        tclient.get('statuses/show', { id: match[1], tweet_mode: 'extended' }, async function(error, tweets) {
             if (!error) {
                 // if there's less than one image, don't post
                 if (tweets.extended_entities.media.length >= 2) {
