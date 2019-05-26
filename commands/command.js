@@ -20,9 +20,8 @@ const hunger = require('./commands/hunger');
 const meowComm = require('./commands/meow');
 const mood = require('./commands/mood');
 const pet = require('./commands/pet');
-const play = require('./commands/play');
 
-module.exports.commands = [feed, hunger, meowComm, mood, pet, play];
+module.exports.commands = [feed, hunger, meowComm, mood, pet];
 
 const blobcat = require('./triggers/blobcat');
 const bork = require('./triggers/bork');
