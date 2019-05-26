@@ -17,19 +17,19 @@ const commandList = require('./commands/command');
 client.admin = new Discord.Collection();
 const adminComms = commandList.admin;
 for (const file of adminComms) {
-	client.admin.set(file.settings.regexp, file);
+	client.admin.set(file.settings.tag, file);
 }
 
 client.commands = new Discord.Collection();
 const commandsComms = commandList.commands;
 for (const file of commandsComms) {
-	client.commands.set(file.settings.regexp, file);
+	client.commands.set(file.settings.tag, file);
 }
 
 client.triggers = new Discord.Collection();
 const triggerFiles = commandList.triggers;
 for (const file of triggerFiles) {
-	client.triggers.set(file.settings.regexp, file);
+	client.triggers.set(file.settings.tag, file);
 }
 
 client.special = new Discord.Collection();
@@ -72,7 +72,7 @@ client.on('message', async message => {
 	// pre-verification admin/info ops
 	if (mentioned === true) {
 		for (const [key, value] of client.admin) {
-			if (key.test(message.content)) {
+			if (value.settings.regexp.test(message.content)) {
 				if (value.settings.guildSettings) {
 					value.execute(message, guildSettings);
 				}
@@ -91,7 +91,7 @@ client.on('message', async message => {
 	}
 	if (mentioned === true) {
 		for (const [key, value] of client.commands) {
-			if (key.test(message.content)) {
+			if (value.settings.regexp.test(message.content)) {
 				// console.log('found ' + value.info.name);
 				if (!value.settings.sim || value.settings.sim === true && thisGuildSettings.sim === true) {
 					if (value.settings.await) {
@@ -115,7 +115,7 @@ client.on('message', async message => {
 	}
 	// reg rework done up to here
 	for (const [key, value] of client.triggers) {
-		if (key.test(message.content) && dice <= value.settings.chance) {
+		if (value.settings.regexp.test(message.content) && dice <= value.settings.chance) {
 			if (config.dev === true) {console.log('found ' + value.info.name);}
 			if (value.settings.await) {
 				if (awaitHandler.isPaused(message.channel.id) === false) {
@@ -131,7 +131,7 @@ client.on('message', async message => {
 	}
 	if (mentioned === true) {
 		if (thisGuildSettings.sim === true) {
-			client.commands.get('pet').execute(message, globalCat);
+			client.commands.get('pet_cat').execute(message, globalCat);
 			return;
 		}
 		else {
