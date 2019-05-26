@@ -15,7 +15,6 @@ const moms = require('./admin/moms');
 
 module.exports.admin = [info, toggle, moms];
 
-const asleep = require('./commands/asleep');
 const feed = require('./commands/feed');
 const hunger = require('./commands/hunger');
 const meowComm = require('./commands/meow');
@@ -23,7 +22,7 @@ const mood = require('./commands/mood');
 const pet = require('./commands/pet');
 const play = require('./commands/play');
 
-module.exports.commands = [asleep, feed, hunger, meowComm, mood, pet, play];
+module.exports.commands = [feed, hunger, meowComm, mood, pet, play];
 
 const blobcat = require('./triggers/blobcat');
 const bork = require('./triggers/bork');

@@ -47,7 +47,7 @@ guildSchema.methods.update = function() {
     if (newHunger < 0) newHunger = 0;
     this.hunger = newHunger;
     const dice = Math.floor(Math.random() * 101);
-    if (dice <= 40) {
+    if (dice <= 25) {
         this.asleep = true;
     }
     else {

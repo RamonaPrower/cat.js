@@ -14,6 +14,6 @@ module.exports.info = {
 	summon: '@me moms',
 };
 module.exports.settings = {
-	regexp: 'moms',
+	regexp: /moms$/gmi,
 	tag: 'moms',
 };

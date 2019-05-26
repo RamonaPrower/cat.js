@@ -10,7 +10,7 @@ module.exports.info = {
 	summon: ':3c',
 };
 module.exports.settings = {
-	regexp: 'bo*rk|bjork',
+	regexp: /\b(bo*rk|bjork)\b/gmi,
 	flags: 'gmi',
 	tag: 'bork',
 	chance: 5,

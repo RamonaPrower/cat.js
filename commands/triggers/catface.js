@@ -12,8 +12,7 @@ module.exports.info = {
 	summon: ':3c',
 };
 module.exports.settings = {
-	regexp: ':3c?',
-	flags: 'gmi',
+	regexp: /\b:3c?\b/gmi,
 	tag: 'catface',
 	chance: 5,
 };

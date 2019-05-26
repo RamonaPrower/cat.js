@@ -14,7 +14,7 @@ module.exports.info = {
 	summon: 'pet',
 };
 module.exports.settings = {
-	regexp: 'pet',
+	regexp: /pet$/gmi,
 	tag: 'pet_cat',
 	sim: true,
 };

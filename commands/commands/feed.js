@@ -36,7 +36,7 @@ module.exports.info = {
 	summon: 'feed',
 };
 module.exports.settings = {
-	regexp: 'feed',
+	regexp: /feed$/gmi,
 	tag: 'feed',
 	sim: true,
 	await: true,

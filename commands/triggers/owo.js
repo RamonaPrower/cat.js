@@ -10,8 +10,7 @@ module.exports.info = {
     summon: 'owo',
 };
 module.exports.settings = {
-	regexp: 'owo|uwu',
-	flags: 'gmi',
+	regexp: /owo|uwu/gmi,
 	tag: 'owo',
 	chance: 5,
 };

@@ -1,7 +1,6 @@
 // imports
 const Twitter = require('twitter');
 const config = require('../../config.json');
-const Discord = require('discord.js');
 // exports
 module.exports = {
 	async execute(message) {
@@ -17,11 +16,16 @@ module.exports = {
         tclient.get('statuses/show', { id: match[1], tweet_mode: 'extended' }, async function(error, tweets) {
             if (!error) {
                 // if there's less than one image, don't post
+                if (!tweets.extended_entities) return;
                 if (tweets.extended_entities.media.length >= 2) {
                     webhookOrMessage(tweets.extended_entities.media.slice(1), message);
                 }
+                if (error) {
+                    console.error(error)
+                }
             }
             if (error) {
+                console.error(`errored tweet is ${match[0]}`);
                 console.log(error);
             }
         });
@@ -30,21 +34,27 @@ module.exports = {
 };
 
 async function webhookOrMessage(images, message) {
-    const hook = await message.channel.fetchWebhooks();
-    if (hook.size !== 0 && hook.find('name', config.webhookname)) {
-        const sendHook = hook.find('name', config.webhookname);
-        await sendViaHook(images, message, sendHook);
-
-    }
-    else if (!hook.find('name', config.webhookname) && message.guild.me.hasPermission('MANAGE_WEBHOOKS')) {
-        const sendHook = await message.channel.createWebhook(config.webhookname, './images/twitter.png');
-        await sendViaHook(images, message, sendHook);
+    if (message.guild.me.hasPermission('MANAGE_WEBHOOKS')) {
+        const hook = await message.channel.fetchWebhooks();
+        if (hook.size !== 0 && hook.find('name', config.webhookname)) {
+            const sendHook = hook.find('name', config.webhookname);
+            await sendViaHook(images, message, sendHook);
+    
+        }
+        else if (!hook.find('name', config.webhookname)) {
+            const sendHook = await message.channel.createWebhook(config.webhookname, './images/twitter.png');
+            await sendViaHook(images, message, sendHook);
+        }
+        else{
+            console.log('something went wrong with the webhooks');
+        }
     }
     else {
+        const data = [];
         for (const imageUrl of images) {
-            const attachment = new Discord.Attachment(imageUrl.media_url);
-            await message.channel.send(attachment);
+            data.push(imageUrl.media_url);
         }
+        await message.channel.send(data);
     }
 }
 
@@ -62,7 +72,6 @@ module.exports.info = {
 	summon: 'twitter link',
 };
 module.exports.settings = {
-	// eslint-disable-next-line no-useless-escape
-    regexp: 'https?:\/\/(?:mobile\.)?twitter\.com\/(?:#!\/)?(?:\w+)\/status(?:es)?\/(\d+)',
+    regexp: /(?<!\|\|)(?<!<)https?:\/\/(?:mobile\.)?twitter\.com\/(?:#!\/)?(?:\w+)\/status(?:es)?\/(\d+)/gmi,
 	tag: 'twitter',
 };

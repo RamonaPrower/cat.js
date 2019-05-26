@@ -60,17 +60,19 @@ function updateCat() {
 
 
 client.on('message', async message => {
+	// ignoring bot commands
 	if (message.author.bot) return;
-	let newReg;
+	// checking for server outages
+	if (message.guild.available === false) return;
+	let dice;
+	// storing the results of if is mentioned, and the settings of the guild
 	const mentioned = message.isMentioned(client.user);
 	const thisGuildSettings = await guildSettings.getSettings(message.guild.id);
 
 	// pre-verification admin/info ops
 	if (mentioned === true) {
 		for (const [key, value] of client.admin) {
-			newReg = new RegExp(key, 'gm');
-			if (newReg.test(message.content)) {
-				// console.log('found ' + value.info.name);
+			if (key.test(message.content)) {
 				if (value.settings.guildSettings) {
 					value.execute(message, guildSettings);
 				}
@@ -81,14 +83,15 @@ client.on('message', async message => {
 			}
 		}
 	}
-	// we store a guild and last updated time in memory to save on DB updates
-	// if these aren't 100% accurate, it's not the end of the world
-	// i might update this to users, but i'm not all that big on it right now
-	// post-verification
+	if (thisGuildSettings.twitter === true) {
+		if (commandList.twitter.settings.regexp.test(message.content)) {
+			commandList.twitter.execute(message);
+			return;
+		}
+	}
 	if (mentioned === true) {
 		for (const [key, value] of client.commands) {
-			newReg = new RegExp(key, 'gmi');
-			if (newReg.test(message.content)) {
+			if (key.test(message.content)) {
 				// console.log('found ' + value.info.name);
 				if (!value.settings.sim || value.settings.sim === true && thisGuildSettings.sim === true) {
 					if (value.settings.await) {
@@ -104,12 +107,16 @@ client.on('message', async message => {
 			}
 		}
 	}
-	// const dice = 1;
-	const dice = Math.floor((Math.random() * 100) + 1);
+	if (config.dev === true) {
+		dice = 1;
+	}
+	else {
+		dice = Math.floor((Math.random() * 100) + 1);
+	}
+	// reg rework done up to here
 	for (const [key, value] of client.triggers) {
-		newReg = new RegExp(key, value.settings.flags);
-		if (newReg.test(message.content) && dice <= value.settings.chance) {
-			// console.log('found ' + value.info.name);
+		if (key.test(message.content) && dice <= value.settings.chance) {
+			if (config.dev === true) {console.log('found ' + value.info.name);}
 			if (value.settings.await) {
 				if (awaitHandler.isPaused(message.channel.id) === false) {
 					value.execute(message, awaitHandler);
@@ -119,14 +126,6 @@ client.on('message', async message => {
 			else {
 				value.execute(message, globalCat);
 			}
-			return;
-		}
-	}
-	if (thisGuildSettings.twitter === true) {
-		newReg = /(?<!\|\|)(?<!<)https?:\/\/(?:mobile\.)?twitter\.com\/(?:#!\/)?(?:\w+)\/status(?:es)?\/(\d+)/gmi;
-		if (newReg.test(message.content)) {
-			// console.log('twitter link found');
-			commandList.twitter.execute(message);
 			return;
 		}
 	}
