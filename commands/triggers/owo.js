@@ -10,7 +10,7 @@ module.exports.info = {
     summon: 'owo',
 };
 module.exports.settings = {
-	regexp: /owo|uwu/gmi,
+	regexp: /owo|uwu/mi,
 	tag: 'owo',
 	chance: 5,
 };

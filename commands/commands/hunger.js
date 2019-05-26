@@ -15,7 +15,7 @@ module.exports.info = {
 	summon: 'Hunger',
 };
 module.exports.settings = {
-	regexp: /hunger$/gmi,
+	regexp: /hunger$/mi,
 	tag: 'hunger',
 	sim: true,
 };

@@ -25,6 +25,6 @@ module.exports.info = {
 	summon: 'Mention user and "place bed"',
 };
 module.exports.settings = {
-	regexp: /place bed$/gmi,
+	regexp: /place bed$/mi,
 	tag: 'place_bed',
 };

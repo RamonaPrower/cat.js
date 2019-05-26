@@ -20,7 +20,7 @@ module.exports.info = {
 	summon: 'info',
 };
 module.exports.settings = {
-	regexp: /info$/gmi,
+	regexp: /info$/mi,
 	tag: 'info',
 	guildSettings: true,
 };

@@ -24,7 +24,7 @@ module.exports.info = {
 	summon: 'toggle',
 };
 module.exports.settings = {
-	regexp: /toggle$/gmi,
+	regexp: /toggle$/mi,
 	tag: 'toggle',
 	guildSettings: true,
 };

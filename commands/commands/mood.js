@@ -16,7 +16,7 @@ module.exports.info = {
 	summon: 'mood',
 };
 module.exports.settings = {
-	regexp: /mood$/gmi,
+	regexp: /mood$/mi,
 	tag: 'mood',
 	sim: true,
 };

@@ -10,7 +10,7 @@ module.exports.info = {
     summon: 'catblob',
 };
 module.exports.settings = {
-	regexp: /.*blobcatheart.*/gmi,
+	regexp: /.*blobcatheart.*/mi,
 	tag: 'catblob',
 	chance: 5,
 };
