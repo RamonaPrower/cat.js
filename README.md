@@ -3,9 +3,6 @@
 
 ## LIST OF COMMANDS
 ### Admin
-#### Bed 
-*  (this is unused at the moment, as placing beds in channels felt redundant when you can just limit where the bot goes anyway),
-
 #### Info
   * used by : Everyone
   * Summon: @me info
@@ -17,11 +14,6 @@
   * Returns: a private DM about how the guild setup is for the bot
   * info: If you don't put in sim and/or twitter, it'll just dm you the current server settings
 ### Commands
-#### Asleep
-  * used by: everyone
-  * summon @me asleep
-  * sim: true
-  * info: it'll try to get whether the cat is asleep, if it is, it'll show him asleep, if not, it'll show his mood
 #### Feed
   * used by: everyone
   * summon: @me feed
@@ -79,10 +71,10 @@
   * used by: everyone
   * summon: LOUD CAPS LOCK IN THE WHOLE MESSAGE
   * info: gets scared by loud noises, silently listens for consolment (it's ok, poor cat, etc)
-  * chance: 5%
+  * chance: 10%
 ### Twitter for discord
 #### Twitter for discord
   * used by: everyone
   * summon: twitter links
-  * info: auto-gets the next image from a twitter embed (i'll update to work exactly like goodboy.py at some point)
+  * info: auto-gets the next image from a twitter embed, and passes it through a webhook, when possible
   * twitter setting needed: true
