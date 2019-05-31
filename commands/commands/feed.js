@@ -10,11 +10,14 @@ const badfood = response => {
 // exports
 module.exports = {
 	async execute(message, awaitHandler) {
+		// create cat
 	const guildCat = await GuildCat.create(message.guild.id);
+	// feed that cat!
 	const fedCatStr = guildCat.feed();
 	message.channel.send(fedCatStr)
 	.then(() => {
 		if (fedCatStr === '<:meowsip:578260722652413976>') {
+			// we add the current channel to the awaitHandler to stop double posts
 			awaitHandler.add(message.channel.id);
 			message.channel.awaitMessages(badfood, { maxMatches: 1, time: 15000, errors: ['time'] })
 			.then(() => {
