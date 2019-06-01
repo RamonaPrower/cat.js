@@ -2,7 +2,7 @@
 const { GuildUserCat, UserCat } = require('../../utils/cat');
 const strings = require('../../strings/cat.json');
 const huggies = response => {
-    const newReg = /\b(hug!?|uppies!?)/mi;
+    const newReg = /\b(hug!?|uppies!?|cuddles?!?)/mi;
 	return newReg.test(response.content);
 	};
 // exports
@@ -42,7 +42,7 @@ module.exports.info = {
 	summon: 'hug',
 };
 module.exports.settings = {
-	regexp: /\b(hug\??|uppies\??)/mi,
+	regexp: /\b(hug\??|uppies\??|cuddles?\??)/mi,
 	tag: 'hello',
     sim: true,
     await: true,

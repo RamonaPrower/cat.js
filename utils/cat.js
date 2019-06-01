@@ -283,6 +283,9 @@ class GuildUserCat extends Cat {
 			return happyStr;
 		}
 	}
+	/**
+	 * Check if the cat is asleep or hungry, if it is, it'll return its mood as a string, if not, returns nothing
+	 */
 	isAsleepOrHungry() {
 		function rand(i) {
 			return Math.floor(Math.random() * i);
