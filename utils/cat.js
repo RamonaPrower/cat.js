@@ -176,12 +176,13 @@ class GuildUserCat extends Cat {
 	/**
 	 * Gets a reaction to a user doing something to the cat
 	 * @param {number} globalMood This is the Global Mood of the GlobalCat
-	 * @param {string} action This is the action that you want to do (currently 'pet', 'meow' and 'mood')
+	 * @param {string} action This is the action that you want to do (currently 'pet', 'meow', 'love', and 'mood')
 	 */
 	getReaction(globalMood, action) {
 		const dice = Math.floor((Math.random() * 100) + 1);
 		let overallMood = globalMood + (Math.round(this.user.happiness / 2));
 		let foundAction;
+		// find action to use
 		if (action === 'pet') {
 			foundAction = strings.pet;
 		}
@@ -191,9 +192,13 @@ class GuildUserCat extends Cat {
 		else if (action === 'mood') {
 			foundAction = strings.meow;
 		}
+		else if (action === 'love') {
+			foundAction = strings.love;
+		}
 		else {
 			console.log('getReaction passed with improper command');
-			console.log('this should never happen');
+			console.log('try not to do this');
+			foundAction = strings.meow;
 		}
 		function rand(i) {
 			return Math.floor(Math.random() * i);
@@ -216,6 +221,9 @@ class GuildUserCat extends Cat {
 			else if (globalMood <= 6) {return strings.meow.neutral[Math.floor(Math.random() * strings.meow.neutral.length)];}
 			else {return strings.meow.happy[Math.floor(Math.random() * strings.meow.happy.length)];}
 		}
+		if (action === 'hello') {
+			return '<:meowhello:575816294646022145>';
+		}
 		if (globalMood <= 2) {
 			overallMood--;
 			overallMood--;
@@ -226,6 +234,20 @@ class GuildUserCat extends Cat {
 		}
 		if (overallMood <= 0) {
 			return sadStr;
+		}
+		if (action === 'love') {
+			if (overallMood <= 3) {
+				this.user.positive();
+				return strings.love.sad[Math.floor(Math.random() * strings.love.sad.length)];
+			}
+			else if (overallMood <= 6) {
+				this.user.positive();
+				return strings.love.neutral[Math.floor(Math.random() * strings.love.neutral.length)];
+			}
+			else {
+				this.user.positive();
+				return strings.love.happy[Math.floor(Math.random() * strings.love.happy.length)];
+			}
 		}
 		if (overallMood <= 3) {
 			if (dice <= 25) {
@@ -251,7 +273,7 @@ class GuildUserCat extends Cat {
 			}
 		}
 		if (overallMood >= 15) {
-			if (dice <= 90) {
+			if (dice >= 75) {
 				this.user.positive();
 				return '<:catlove:575816294113476608>';
 			}
@@ -260,6 +282,18 @@ class GuildUserCat extends Cat {
 			this.user.positive();
 			return happyStr;
 		}
+	}
+	isAsleepOrHungry() {
+		function rand(i) {
+			return Math.floor(Math.random() * i);
+		}
+		const hungryArr = strings.hunger.yes;
+		const asleepArr = strings.asleep;
+		const asleepStr = asleepArr[rand(asleepArr.length)];
+		const hungryStr = hungryArr[rand(hungryArr.length)];
+		if (this.guild.hunger <= 4) return hungryStr;
+		if (this.guild.asleep === true && this.user.happiness <= 8) return asleepStr;
+		else return;
 	}
 }
 // exports

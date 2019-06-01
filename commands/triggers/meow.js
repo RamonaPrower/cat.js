@@ -35,7 +35,7 @@ module.exports.info = {
 	summon: 'cat noises',
 };
 module.exports.settings = {
-	regexp: /(?:me+o+w+.*|cats?|ma+u+|me+w+|meor|nya+.?|miaou+|mi+a+u+|mlem|mrrr+)/mi,
+	regexp: /\b(?:me+o+w+|cats?|ma+u+|me+w+|meor|nya+.?|miaou+|mi+a+u+|mlem|mrrr+)\b/mi,
 	flags: 'gmi',
 	tag: 'meow',
 	chance: 5,

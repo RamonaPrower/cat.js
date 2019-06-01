@@ -3,25 +3,23 @@
 // this is on her
 // this also makes the game easier as i can add the file for both collections needed
 
-
-/**
- * // const bed = require('./admin/bed');
- * removing the bed commands for now, it feels redundant when permissions can control where the cat goes anyway
- */
-
 const info = require('./admin/info');
 const toggle = require('./admin/toggle');
 const moms = require('./admin/moms');
 
 module.exports.admin = [info, toggle, moms];
 
+const bazinga = require('./commands/bazinga');
 const feed = require('./commands/feed');
+const hello = require('./commands/hello');
+const hug = require('./commands/hug');
 const hunger = require('./commands/hunger');
+const love = require('./commands/love');
 const meowComm = require('./commands/meow');
 const mood = require('./commands/mood');
 const pet = require('./commands/pet');
 
-module.exports.commands = [feed, hunger, meowComm, mood, pet];
+module.exports.commands = [bazinga, feed, hello, hug, hunger, love, meowComm, mood, pet];
 
 const blobcat = require('./triggers/blobcat');
 const bork = require('./triggers/bork');

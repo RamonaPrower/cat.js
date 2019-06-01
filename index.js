@@ -95,7 +95,10 @@ client.on('message', async message => {
 				// console.log('found ' + value.info.name);
 				if (!value.settings.sim || value.settings.sim === true && thisGuildSettings.sim === true) {
 					if (value.settings.await) {
-						value.execute(message, awaitHandler);
+						if (awaitHandler.isPaused(message.channel.id) === false) {
+							value.execute(message, awaitHandler);
+							return;
+						}
 						return;
 					}
 					else {

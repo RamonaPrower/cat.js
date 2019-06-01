@@ -13,12 +13,20 @@
         "yes": ["<:meowhungry:578260722623053845>", "<:meowreach:578260721968742461>", "<:meowreachsob:578260722752946177>"],
         "no": ["<:meowhmph:575816294390038539>"]
     },
+    "love": {
+        "happy": ["<:catlove:575816294113476608>"],
+        "neutral": ["<:cathappy:575567233254948865>"],
+        "sad": ["<:meowflirty:584157347992043540>"]
+    },
+    "die": ["<:meowknife:584213063519961128>"],
     "asleep": ["<:meowsleeping:580311354188103682>","<:meowtired:580311354460864512>"],
     "fed": ["<:meownomcookie:578260722232983574>", "<:meowsip:578260722652413976>"],
-    "info": ["```PLEAS AWARE OF CAT", "@me asleep", "@me feed", "@me hunger", "@me meow", "@me mood", "@me pet", "if you SCARE ME, pleas tel me its ok```"],
+    "hug": ["<:meowreach:578260721968742461>"],
+    "hugdeny": ["<:meowreachrevsad:584221422419968030>"],
+    "info": ["```PLEAS AWARE OF CAT", "@me feed", "@me hunger", "@me meow", "@me mood", "@me pet", "if you SCARE ME, pleas tel me its ok```"],
     "admininfo": ["I can also do special guild commands if you're an admin, such as", "turning on and off the simulation (@me toggle sim)", "and turning off twitter image auto-expansion (@me toggle twitter)", "Twitter Image auto-expansion is a lot better when i have \"Manage Webhook\" permissions!"],
     "shout": ["<:meowyikes:580076064152485912>", "<:meowterrified:580076064051822592>"],
-    "catsounds": ["<:meowuwu:575816294280986625>", "<:meowsquee:575816294042042375>", "<:meowsmile:575816294507741184>", "<:meowhello:575816294646022145>", "<:cathappy:575567233254948865>", "<:meowbigsmile:575818640616587278>", "<:meowamused:575818640083910677>", "<:meowmelt:575818640000024597>", "meow", "meoooow", "mrow!", "meow!", "meoooooow!", "miaou!", "mrrrr", "miau!", "nyan~", "mlem <:blobcatmlem:405521865268789251>", "purrr~ <:blobcathappy:406260483960733696>"],
+    "catsounds": ["meow", "meoooow", "mrow!", "meow!", "meoooooow!", "miaou!", "mrrrr", "miau!", "nyan~", "mlem <:blobcatmlem:405521865268789251>", "purrr~ <:blobcathappy:406260483960733696>"],
     "calmphrases": ["^it's ok", "^don't worry", "^pet pat", "^poor cat", "sorry"],
     "calmemojis": ["<:pethappy:575816294054756382>", "<:petsad:575816294251757579>"],
     "badfood": ["cat piss"],
