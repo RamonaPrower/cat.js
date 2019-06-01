@@ -1,7 +1,7 @@
 // imports
 // exports
 module.exports = {
-	async execute(message, globalCat) {
+	async execute(message) {
 		message.channel.send('<:meownervous:584165009198940198>');
 	},
 };
