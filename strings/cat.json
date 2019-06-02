@@ -21,7 +21,7 @@
     "die": ["<:meowknife:584213063519961128>"],
     "asleep": ["<:meowsleeping:580311354188103682>","<:meowtired:580311354460864512>"],
     "fed": ["<:meownomcookie:578260722232983574>", "<:meowsip:578260722652413976>"],
-    "hug": ["<:meowreach:578260721968742461>"],
+    "hug": ["<:meowreach:578260721968742461>", "<a:ameowbounce:573431197678698507>"],
     "hugdeny": ["<:meowreachrevsad:584221422419968030>"],
     "info": ["```PLEAS AWARE OF CAT", "@me feed", "@me hunger", "@me meow", "@me mood", "@me pet", "if you SCARE ME, pleas tel me its ok```"],
     "admininfo": ["I can also do special guild commands if you're an admin, such as", "turning on and off the simulation (@me toggle sim)", "and turning off twitter image auto-expansion (@me toggle twitter)", "Twitter Image auto-expansion is a lot better when i have \"Manage Webhook\" permissions!"],

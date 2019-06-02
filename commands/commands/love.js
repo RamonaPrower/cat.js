@@ -4,11 +4,10 @@ const strings = require('../../strings/cat.json');
 // exports
 module.exports = {
 	async execute(message, globalCat) {
-		const dice = Math.floor((Math.random() * 100) + 1);
 		function rand(i) {
 			return Math.floor(Math.random() * i);
 		}
-		if (message.content.includes('i would die for') && dice >= 80) {
+		if (message.content.includes('i would die for')) {
 			message.channel.send(strings.die[rand(strings.die.length)]);
 			return;
 		}
