@@ -148,7 +148,7 @@ client.on('error', data => {
 	console.error('Connection Error', data.message);
 });
 
-client.login(config.token)
+client.login(config.discord)
 	.then(console.log('Logged In'))
 	.catch(console.error);
 
