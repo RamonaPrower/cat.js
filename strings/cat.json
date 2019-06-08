@@ -21,9 +21,9 @@
     "die": ["<:meowknife:584213063519961128>"],
     "asleep": ["<:meowsleeping:580311354188103682>","<:meowtired:580311354460864512>"],
     "fed": ["<:meownomcookie:578260722232983574>", "<:meowsip:578260722652413976>"],
-    "hug": ["<:meowreach:578260721968742461>", "<a:ameowbounce:585563929833635878>"],
+    "hug": ["<:meowreach:578260721968742461>", "<a:ameowreachrev:585571756144590874>", "<a:ameowbounce:585563929833635878>"],
     "hugdeny": ["<:meowreachrevsad:584221422419968030>"],
-    "info": ["```PLEAS AWARE OF CAT", "@me feed", "@me hunger", "@me meow", "@me mood", "@me pet", "if you SCARE ME, pleas tel me its ok```"],
+    "info": ["```PLEAS AWARE OF CAT", "@me feed", "@me hunger", "@me meow", "@me mood", "@me pet", "pleas tel me u lov me lots", "if you SCARE ME, pleas tel me its ok```"],
     "admininfo": ["I can also do special guild commands if you're an admin, such as", "turning on and off the simulation (@me toggle sim)", "and turning off twitter image auto-expansion (@me toggle twitter)", "Twitter Image auto-expansion is a lot better when i have \"Manage Webhook\" permissions!"],
     "shout": ["<:meowyikes:580076064152485912>", "<:meowterrified:580076064051822592>"],
     "catsounds": ["meow", "meoooow", "mrow!", "meow!", "meoooooow!", "miaou!", "mrrrr", "miau!", "nyan~", "mlem <:blobcatmlem:405521865268789251>", "purrr~ <:blobcathappy:406260483960733696>"],
@@ -32,5 +32,6 @@
     "badfood": ["cat piss"],
     "badfoodstring": ["<:meowsipglare:580135721160146975>"],
     "welcome": ["^hello", "^hi", "^henlo", "^heya", "^hoi"],
+    "thankyou": ["thank", "flower"],
     "moms": ["```MY MOMS R", "Colgate#3522 - Main Codebase", "warms#8080 - Initial Implementation", "Else#3573 - Helping with Initial Implementation", "Cat#5365 - Helping with Initial Implementation```"]
 }

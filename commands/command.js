@@ -35,5 +35,6 @@ const twitter = require('./twitter/twitter');
 module.exports.twitter = twitter;
 
 const noSimPet = require('./special/pet');
+const flower = require('./special/flower');
 
-module.exports.special = [noSimPet];
+module.exports.special = [noSimPet, flower];

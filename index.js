@@ -89,6 +89,23 @@ client.on('message', async message => {
 			return;
 		}
 	}
+	if (config.dev === true) {
+		dice = 1;
+	}
+	else {
+		dice = Math.floor((Math.random() * 100) + 1);
+	}
+	if (mentioned === true && awaitHandler.isPaused(message.author.id) === false) {
+		if (thisGuildSettings.sim === true) {
+			if (dice <= 4) {
+				const isFlowerTime = await client.special.get('flower').isFlowerTime(message);
+				if (isFlowerTime === true) {
+					client.special.get('flower').execute(message, awaitHandler);
+					return;
+				}
+			}
+		}
+	}
 	if (mentioned === true) {
 		for (const [key, value] of client.commands) {
 			if (value.settings.regexp.test(message.content)) {
@@ -110,12 +127,6 @@ client.on('message', async message => {
 			}
 		}
 	}
-	if (config.dev === true) {
-		dice = 1;
-	}
-	else {
-		dice = Math.floor((Math.random() * 100) + 1);
-	}
 	// reg rework done up to here
 	for (const [key, value] of client.triggers) {
 		if (value.settings.regexp.test(message.content) && dice <= value.settings.chance) {
@@ -128,6 +139,7 @@ client.on('message', async message => {
 			}
 			else {
 				value.execute(message, globalCat);
+				return;
 			}
 			return;
 		}
