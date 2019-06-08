@@ -24,11 +24,12 @@ module.exports.commands = [bazinga, feed, hello, hug, hunger, love, meowComm, mo
 const blobcat = require('./triggers/blobcat');
 const bork = require('./triggers/bork');
 const catFace = require('./triggers/catface');
+const kawaii = require('./triggers/kawaii');
 const meowTrigg = require('./triggers/meow');
 const owo = require('./triggers/owo');
 const shouting = require('./triggers/shouting');
 
-module.exports.triggers = [blobcat, bork, catFace, meowTrigg, owo, shouting];
+module.exports.triggers = [blobcat, bork, catFace, kawaii, meowTrigg, owo, shouting];
 
 const twitter = require('./twitter/twitter');
 
