@@ -5,7 +5,8 @@ module.exports = {
 	async execute(message, globalCat) {
 		// to refactor, GuildUserCat isn't needed, can just be guild
 		const guildUserCat = await GuildUserCat.create(message.guild.id, message.author.id);
-		message.channel.send(guildUserCat.getReaction(globalCat.mood, 'mood'));
+		const resp = await guildUserCat.getReaction(globalCat.mood, 'mood');
+		message.channel.send(resp);
 	},
 };
 

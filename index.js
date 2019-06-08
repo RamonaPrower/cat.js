@@ -90,7 +90,7 @@ client.on('message', async message => {
 		}
 	}
 	if (config.dev === true) {
-		dice = 1;
+		dice = Math.floor((Math.random() * 100) + 1);
 	}
 	else {
 		dice = Math.floor((Math.random() * 100) + 1);

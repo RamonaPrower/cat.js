@@ -4,7 +4,8 @@ const { GuildUserCat } = require('../../utils/cat');
 module.exports = {
 	async execute(message, globalCat) {
 		const guildUserCat = await GuildUserCat.create(message.guild.id, message.author.id);
-		message.channel.send(guildUserCat.getReaction(globalCat.mood, 'meow'));
+		const resp = await guildUserCat.getReaction(globalCat.mood, 'meow');
+		message.channel.send(resp);
 	},
 };
 

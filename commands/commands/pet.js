@@ -4,7 +4,12 @@ const { GuildUserCat } = require('../../utils/cat');
 module.exports = {
 	async execute(message, globalCat) {
 		const guildUserCat = await GuildUserCat.create(message.guild.id, message.author.id);
-		message.channel.send(guildUserCat.getReaction(globalCat.mood, 'pet'));
+		let resp = await guildUserCat.getReaction(globalCat.mood, 'pet');
+		if (!resp) {
+			resp = '<:meowhmph:575816294390038539>';
+			console.log('i had an empty string return,', `mood was ${guildUserCat.user.happiness}`);
+		}
+		message.channel.send(resp);
 	},
 };
 

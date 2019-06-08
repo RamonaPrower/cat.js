@@ -178,7 +178,7 @@ class GuildUserCat extends Cat {
 	 * @param {number} globalMood This is the Global Mood of the GlobalCat
 	 * @param {string} action This is the action that you want to do (currently 'pet', 'meow', 'love', and 'mood')
 	 */
-	getReaction(globalMood, action) {
+	async getReaction(globalMood, action) {
 		const dice = Math.floor((Math.random() * 100) + 1);
 		let overallMood = globalMood + (Math.round(this.user.happiness / 2));
 		let foundAction;
@@ -237,15 +237,15 @@ class GuildUserCat extends Cat {
 		}
 		if (action === 'love') {
 			if (overallMood <= 3) {
-				this.user.positive();
+				await this.user.positive();
 				return strings.love.sad[Math.floor(Math.random() * strings.love.sad.length)];
 			}
 			else if (overallMood <= 6) {
-				this.user.positive();
+				await this.user.positive();
 				return strings.love.neutral[Math.floor(Math.random() * strings.love.neutral.length)];
 			}
 			else {
-				this.user.positive();
+				await this.user.positive();
 				return strings.love.happy[Math.floor(Math.random() * strings.love.happy.length)];
 			}
 		}
@@ -254,32 +254,32 @@ class GuildUserCat extends Cat {
 				return sadStr;
 			}
 			else if (dice <= 66) {
-				this.user.positive();
+				await this.user.positive();
 				return neutralStr;
 			}
 			else {
-				this.user.positive();
+				await this.user.positive();
 				return happyStr;
 			}
 		}
 		if (overallMood <= 6) {
 			if (dice <= 66) {
-				this.user.positive();
+				await this.user.positive();
 				return neutralStr;
 			}
 			else {
-				this.user.positive();
+				await this.user.positive();
 				return happyStr;
 			}
 		}
 		if (overallMood >= 15) {
 			if (dice >= 75) {
-				this.user.positive();
+				await this.user.positive();
 				return '<:catlove:575816294113476608>';
 			}
 		}
 		else {
-			this.user.positive();
+			await this.user.positive();
 			return happyStr;
 		}
 	}
