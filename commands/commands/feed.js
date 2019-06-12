@@ -13,7 +13,7 @@ module.exports = {
 		// create cat
 	const guildCat = await GuildCat.create(message.guild.id);
 	// feed that cat!
-	const fedCatStr = guildCat.feed();
+	const fedCatStr = await guildCat.feed();
 	message.channel.send(fedCatStr)
 	.then(() => {
 		if (fedCatStr === '<:meowsip:578260722652413976>') {

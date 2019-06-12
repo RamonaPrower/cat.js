@@ -108,7 +108,7 @@ class GuildCat extends Cat {
 	 * Feeds the cat
 	 * @returns {string} the mood, as an emoji string
 	 */
-	feed() {
+	async feed() {
 		function rand(i) {
 			return Math.floor(Math.random() * i);
 		}
@@ -120,7 +120,7 @@ class GuildCat extends Cat {
 			return notHungryStr;
 		}
 		else {
-			this.guild.feed();
+			await this.guild.feed();
 			return fedStr;
 		}
 	}

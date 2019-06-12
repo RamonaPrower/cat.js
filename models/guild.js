@@ -39,7 +39,7 @@ guildSchema.statics.checkGuild = async function(snowflake) {
 /**
  * sends a ping to update the db, if it's needed
  */
-guildSchema.methods.update = function() {
+guildSchema.methods.update = async function() {
     const timeNow = new Date();
     const diff = moment().diff(this.lastUpdate, 'hours');
     if (diff === 0) return;
@@ -54,7 +54,7 @@ guildSchema.methods.update = function() {
         this.asleep = false;
     }
     this.lastUpdate = timeNow;
-    this.save();
+    await this.save();
 };
 
 guildSchema.methods.updateHunger = function() {
@@ -67,10 +67,10 @@ guildSchema.methods.updateHunger = function() {
     this.lastUpdate = timeNow;
     this.save();
 };
-guildSchema.methods.feed = function() {
+guildSchema.methods.feed = async function() {
     this.hunger = 10;
     this.lastUpdate = new Date();
-    this.save();
+    await this.save();
 };
 
 const Guild = mongoose.model('Guild', guildSchema);

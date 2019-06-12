@@ -26,13 +26,10 @@ userSchema.statics.checkUser = async function(snowflake) {
 		snowflake: snowflake,
 	});
 };
-// userSchema.methods.update = function() {
-
-// }
 /**
  * Handles the positive interactions of the bot
  */
-userSchema.methods.positive = function() {
+userSchema.methods.positive = async function() {
 	const timeNow = new Date();
 	const diff = moment().diff(this.lastReset, 'days');
 	// if it's been more than a day
@@ -60,7 +57,7 @@ userSchema.methods.positive = function() {
 		this.happiness++;
 		this.interactionsLeft--;
 	}
-	this.save();
+	await this.save();
 	return;
 };
 
