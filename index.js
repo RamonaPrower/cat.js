@@ -83,6 +83,7 @@ client.on('message', async message => {
 			}
 		}
 	}
+	// twitter test
 	if (thisGuildSettings.twitter === true) {
 		if (commandList.twitter.settings.regexp.test(message.content)) {
 			commandList.twitter.execute(message);
@@ -95,6 +96,7 @@ client.on('message', async message => {
 	else {
 		dice = Math.floor((Math.random() * 100) + 1);
 	}
+	// flower test
 	if (mentioned === true && awaitHandler.isPaused(message.author.id) === false) {
 		if (thisGuildSettings.sim === true) {
 			if (dice <= 4) {
@@ -106,6 +108,7 @@ client.on('message', async message => {
 			}
 		}
 	}
+	// commands
 	if (mentioned === true) {
 		for (const [key, value] of client.commands) {
 			if (value.settings.regexp.test(message.content)) {
@@ -127,7 +130,7 @@ client.on('message', async message => {
 			}
 		}
 	}
-	// reg rework done up to here
+	// trigger test
 	for (const [key, value] of client.triggers) {
 		if (value.settings.regexp.test(message.content) && dice <= value.settings.chance) {
 			if (config.dev === true) {console.log('found ' + value.info.name);}
@@ -144,6 +147,7 @@ client.on('message', async message => {
 			return;
 		}
 	}
+	// default reaction to @
 	if (mentioned === true) {
 		if (thisGuildSettings.sim === true) {
 			client.commands.get('pet_cat').execute(message, globalCat);
