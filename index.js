@@ -130,20 +130,39 @@ client.on('message', async message => {
 			}
 		}
 	}
+	if (config.dev === true) {
+		dice = 1;
+	}
 	// trigger test
 	for (const [key, value] of client.triggers) {
 		if (value.settings.regexp.test(message.content) && dice <= value.settings.chance) {
 			if (config.dev === true) {console.log('found ' + value.info.name);}
-			if (value.settings.await) {
-				if (awaitHandler.isPaused(message.channel.id) === false) {
-					value.execute(message, awaitHandler);
+			if (key === 'shout') {
+				console.log('shouting detected');
+				if (thisGuildSettings.shouting === true) {
+					console.log('guild settings allow shouting');
+					if (awaitHandler.isPaused(message.channel.id) === false) {
+						console.log('not awaiting safety pats');
+						value.execute(message, awaitHandler);
+						return;
+					}
+					return;
+				}
+				else {
+					console.log('shouting not allowed');
 					return;
 				}
 			}
-			else {
-				value.execute(message, globalCat);
-				return;
-			}
+			else if (value.settings.await) {
+					if (awaitHandler.isPaused(message.channel.id) === false) {
+						value.execute(message, awaitHandler);
+						return;
+					}
+				}
+				else {
+					value.execute(message, globalCat);
+					return;
+				}
 			return;
 		}
 	}

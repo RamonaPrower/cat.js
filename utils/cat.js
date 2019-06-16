@@ -277,6 +277,10 @@ class GuildUserCat extends Cat {
 				await this.user.positive();
 				return '<:catlove:575816294113476608>';
 			}
+			else {
+				await this.user.positive();
+				return happyStr;
+			}
 		}
 		else {
 			await this.user.positive();

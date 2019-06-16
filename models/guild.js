@@ -30,6 +30,11 @@ const guildSchema = new mongoose.Schema({
         required: true,
         default: false,
     },
+    enableShouting: {
+        type: Boolean,
+        required: true,
+        default: true,
+    },
 });
 guildSchema.statics.checkGuild = async function(snowflake) {
     return this.findOne({

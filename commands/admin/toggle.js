@@ -12,9 +12,13 @@ module.exports = {
             if (message.content.includes('twitter')) {
                 await guildSettings.toggleTwitter(message.guild.id);
             }
+            // change shouting if shouting was in the message
+            if (message.content.includes('shouting')) {
+                await guildSettings.toggleShouting(message.guild.id);
+            }
             // send settings
             const settings = await guildSettings.getSettings(message.guild.id);
-            message.author.send(`Settings for ${message.guild.name} is now, Cat Sim is ${settings.sim === true ? 'ON' : 'OFF'}, Twitter Linking is ${settings.twitter === true ? 'ON' : 'OFF'}`);
+            message.author.send(`Settings for ${message.guild.name} is now, Cat Sim is ${settings.sim === true ? 'ON' : 'OFF'}, Twitter Linking is ${settings.twitter === true ? 'ON' : 'OFF'}, Shouting commands are ${settings.shouting === true ? 'ON' : 'OFF'}`);
         }
         else {
             // log commands for if they don't have perms (might add a blocklist if this persists)
@@ -29,7 +33,7 @@ module.exports.info = {
 	summon: 'toggle',
 };
 module.exports.settings = {
-	regexp: /toggle$/mi,
+	regexp: /toggle/mi,
 	tag: 'toggle',
 	guildSettings: true,
 };

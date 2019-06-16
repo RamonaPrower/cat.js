@@ -33,6 +33,7 @@ class GuildSettings {
             this.guilds.set(guildId, {
                 sim: search.enableSim,
                 twitter: search.enableTwitter,
+                shouting: search.enableShouting,
             });
             return this.guilds.get(guildId);
         }
@@ -53,6 +54,7 @@ class GuildSettings {
             this.guilds.set(guildId, {
                 sim: search.enableSim,
                 twitter: search.enableTwitter,
+                shouting: search.enableShouting,
             });
             return this.guilds.get(guildId);
         }
@@ -72,6 +74,27 @@ class GuildSettings {
         this.guilds.set(guildId, {
             sim: search.enableSim,
             twitter: search.enableTwitter,
+            shouting: search.enableShouting,
+        });
+        return this.guilds.get(guildId);
+    }
+    /**
+     * Toggles the shouting command on a server
+     * @param {Snowflake} guildId The guild ID
+     */
+    async toggleShouting(guildId) {
+        const search = await Guild.checkGuild(guildId);
+        if (search.enableShouting === true) {
+            search.enableShouting = false;
+        }
+        else {
+            search.enableShouting = true;
+        }
+        await search.save();
+        this.guilds.set(guildId, {
+            sim: search.enableSim,
+            twitter: search.enableTwitter,
+            shouting: search.enableShouting,
         });
         return this.guilds.get(guildId);
     }
