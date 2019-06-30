@@ -64,6 +64,7 @@ client.on('message', async message => {
 	if (message.author.bot) return;
 	// checking for server outages
 	if (message.guild.available === false) return;
+	if (awaitHandler.isPaused(message.author.id) === true) return;
 	let dice;
 	// storing the results of if is mentioned, and the settings of the guild
 	const mentioned = message.isMentioned(client.user);
@@ -138,18 +139,14 @@ client.on('message', async message => {
 		if (value.settings.regexp.test(message.content) && dice <= value.settings.chance) {
 			if (config.dev === true) {console.log('found ' + value.info.name);}
 			if (key === 'shout') {
-				console.log('shouting detected');
 				if (thisGuildSettings.shouting === true) {
-					console.log('guild settings allow shouting');
 					if (awaitHandler.isPaused(message.channel.id) === false) {
-						console.log('not awaiting safety pats');
 						value.execute(message, awaitHandler);
 						return;
 					}
 					return;
 				}
 				else {
-					console.log('shouting not allowed');
 					return;
 				}
 			}

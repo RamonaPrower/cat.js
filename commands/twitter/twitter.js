@@ -116,7 +116,7 @@ async function quoteWebhookOrMessage(link, message) {
         }
     }
     else {
-        await message.channel.send(`Found Quoted Tweet: `);
+        await message.channel.send(`Found Quoted Tweet: ${link}`);
     }
 };
 
