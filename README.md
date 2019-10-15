@@ -21,7 +21,7 @@
   * info: It'll try to feed the cat, if he's hungry, he'll send an eating emoji, if he's not, he'll turn up his nose
 #### Hunger
   * used by: everyone
-  * summon: @me hungry
+  * summon: @me hunger
   * sim: true
   * info: it'll spit out an emoji if the cat is hungry or not
 #### Meow
