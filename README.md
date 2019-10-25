@@ -36,11 +36,9 @@
   * info: a general reaction command, functionally the same as meow
 #### Pet
   * used by: everyone
-  * summon: @me mood
+  * summon: @me
   * sim: true
   * info: petting the cat, whilst it's in a good mood makes it happier with you, and it'll react poorly if it's in a bad mood, or if it doesn't like you a lot.
-#### Play
-  * Soon™
 ### Triggers
 #### Blobcat
   * used by: everyone

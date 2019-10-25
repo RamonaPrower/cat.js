@@ -17,6 +17,7 @@ const love = require('./commands/love');
 const meowComm = require('./commands/meow');
 const mood = require('./commands/mood');
 const pet = require('./commands/pet');
+const vibe = require('./commands/vibe');
 // triggers
 const blobcat = require('./triggers/blobcat');
 const bork = require('./triggers/bork');
@@ -32,7 +33,7 @@ const noSimPet = require('./special/pet');
 const flower = require('./special/flower');
 
 module.exports.admin = [info, toggle, moms];
-module.exports.commands = [bazinga, feed, hello, hug, hunger, love, meowComm, mood, pet, shouting];
+module.exports.commands = [bazinga, feed, hello, hug, hunger, love, meowComm, mood, pet, shouting, vibe];
 module.exports.special = [noSimPet, flower];
 module.exports.triggers = [blobcat, bork, catFace, kawaii, meowTrigg, owo, shouting];
 module.exports.twitter = twitter;
