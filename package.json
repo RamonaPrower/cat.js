@@ -10,10 +10,10 @@
   "author": "Ramona Prower",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.4.2",
-    "lodash": "^4.17.13",
+    "discord.js": "^11.5.1",
+    "lodash": "^4.17.15",
     "moment": "^2.24.0",
-    "mongoose": "^5.5.5",
+    "mongoose": "^5.7.11",
     "twitter": "^1.7.1"
   }
 }
