@@ -35,17 +35,14 @@ async function matchTweets(tclient, message) {
 
 async function handleTweet(tclient, tweets, message) {
     if (tweets.is_quote_status === true) {
-        handleQuoteTweet(tclient, tweets, message);
+        await handleQuoteTweet(tclient, tweets, message);
     }
 }
 
 async function handleQuoteTweet(tclient, tweets, message) {
     let link = `https://twitter.com/${tweets.quoted_status.user.screen_name}/status/${tweets.quoted_status.id_str}`
     tclient.get('statuses/show', { id: tweets.quoted_status.id_str, tweet_mode: 'extended' }, function (error, tweets2) {
-        if (tweets2.extended_entities) {
-                quoteWebhookOrMessage(link, message);
-                return;
-            }
+               quoteWebhookOrMessage(link, message);
         }
     )
 }
