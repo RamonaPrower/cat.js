@@ -22,7 +22,8 @@ async function matchTweets(tclient, message) {
     if (!match[1]) { return console.log('i could\'nt find a match') }
     tclient.get('statuses/show', { id: match[1], tweet_mode: 'extended' }, async function (error, tweets) {
         if (!error) {
-            handleTweet(tclient, tweets, message);
+            console.log('got to handletweet');
+           await handleTweet(tclient, tweets, message);
 
         }
         if (error) {
@@ -35,14 +36,16 @@ async function matchTweets(tclient, message) {
 
 async function handleTweet(tclient, tweets, message) {
     if (tweets.is_quote_status === true) {
+        console.log('got to handlequotetweet');
         await handleQuoteTweet(tclient, tweets, message);
     }
 }
 
 async function handleQuoteTweet(tclient, tweets, message) {
     let link = `https://twitter.com/${tweets.quoted_status.user.screen_name}/status/${tweets.quoted_status.id_str}`
-    tclient.get('statuses/show', { id: tweets.quoted_status.id_str, tweet_mode: 'extended' }, function (error, tweets2) {
-               quoteWebhookOrMessage(link, message);
+    tclient.get('statuses/show', { id: tweets.quoted_status.id_str, tweet_mode: 'extended' }, async function (error, tweets2) {
+        console.log('got to webhookOrMessage');
+               await quoteWebhookOrMessage(link, message);
         }
     )
 }
@@ -52,11 +55,13 @@ async function quoteWebhookOrMessage(link, message) {
         const hook = await message.channel.fetchWebhooks();
         if (hook.size !== 0 && hook.find('name', config.webhookname)) {
             const sendHook = hook.find('name', config.webhookname);
+            console.log('got to send via hook');
             await quoteSendViaHook(link, sendHook);
 
         }
         else if (!hook.find('name', config.webhookname)) {
             const sendHook = await message.channel.createWebhook(config.webhookname, './images/twitter.png');
+            console.log('got to send via hook');
             await quoteSendViaHook(link, sendHook);
         }
         else {
@@ -64,6 +69,7 @@ async function quoteWebhookOrMessage(link, message) {
         }
     }
     else {
+        console.log('got to send via message');
         await message.channel.send(`Found Quoted Tweet: ${link}`);
     }
 };
@@ -79,6 +85,6 @@ module.exports.info = {
     summon: 'twitter link',
 };
 module.exports.settings = {
-    regexp: /(?<!\|\|)(?<!<)https?:\/\/(?:mobile\.)?twitter\.com\/(?:#!\/)?(?:\w+)\/status(?:es)?\/(\d+)/gmi,
+    regexp: /(?<!\|\|)(?<!<)https?:\/\/(?:mobile\.)?twitter\.com\/(?:#!\/)?(?:\w+)\/status(?:es)?\/(\d+)/mi,
     tag: 'twitter',
 }
