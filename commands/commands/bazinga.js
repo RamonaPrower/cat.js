@@ -12,7 +12,7 @@ module.exports.info = {
 	summon: 'bazinga',
 };
 module.exports.settings = {
-	regexp: /\b(bazinga|bojangles|zimbabwe|bazlooples|bazpingo|basengan)\b/mi,
+	regexp: /\b(bazinga|bojangles|zimbabwe|bazlooples|bazpingo|basengan|terfs|transphobes)\b/mi,
 	tag: 'bazinga',
 	sim: true,
 };

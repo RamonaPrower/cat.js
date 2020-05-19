@@ -14,5 +14,5 @@ module.exports.info = {
 module.exports.settings = {
 	regexp: /\bkawaii+\b/mi,
 	tag: 'kawaii',
-	chance: 5,
+	chance: 15,
 };

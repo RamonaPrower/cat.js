@@ -14,5 +14,5 @@ module.exports.info = {
 module.exports.settings = {
 	regexp: /\b:3c?\b/mi,
 	tag: 'catface',
-	chance: 5,
+	chance: 15,
 };

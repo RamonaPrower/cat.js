@@ -12,5 +12,5 @@ module.exports.info = {
 module.exports.settings = {
 	regexp: /\b(owo|uwu)\b/mi,
 	tag: 'owo',
-	chance: 5,
+	chance: 15,
 };

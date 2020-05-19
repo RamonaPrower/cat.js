@@ -13,5 +13,5 @@ module.exports.settings = {
 	regexp: /\b(bo*rk|bjork)\b/mi,
 	flags: 'gmi',
 	tag: 'bork',
-	chance: 5,
+	chance: 15,
 };
