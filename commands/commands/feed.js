@@ -39,7 +39,7 @@ module.exports.info = {
 	summon: 'feed',
 };
 module.exports.settings = {
-	regexp: /feed$/mi,
+	regexp: /feed.*$/mi,
 	tag: 'feed',
 	sim: true,
 	await: true,
