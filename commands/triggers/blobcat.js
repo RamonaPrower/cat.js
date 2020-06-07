@@ -12,5 +12,5 @@ module.exports.info = {
 module.exports.settings = {
 	regexp: /.*blobcatheart.*/mi,
 	tag: 'catblob',
-	chance: 15,
+	chance: 10,
 };
