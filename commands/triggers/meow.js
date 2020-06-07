@@ -38,6 +38,6 @@ module.exports.settings = {
 	regexp: /\b(?:me+o+w+|cats?|ma+u+|me+w+|meor|nya+.?|miaou+|mi+a+u+|mlem|mrrr+)\b/mi,
 	flags: 'gmi',
 	tag: 'meow',
-	chance: 15,
+	chance: 9,
 	await: true,
 };
