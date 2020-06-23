@@ -27,7 +27,7 @@
     "admininfo": ["I can also do special guild commands if you're an admin, such as", "turning on and off the simulation (@me toggle sim), turning on and off Meow reacting to shouting in normal conversations (@me toggle shouting)", "and turning off twitter image auto-expansion (@me toggle twitter)", "Twitter Image auto-expansion is a lot better when i have \"Manage Webhook\" permissions!"],
     "shout": ["<:meowyikes:580076064152485912>", "<:meowterrified:580076064051822592>"],
     "catsounds": ["meow", "meoooow", "mrow!", "meow!", "meoooooow!", "miaou!", "mrrrr", "miau!", "nyan~", "mlem <:blobcatmlem:405521865268789251>", "purrr~ <:blobcathappy:406260483960733696>"],
-    "calmphrases": ["^it's ok", "^don't worry", "^pet pat", "^poor cat", "sorry"],
+    "calmphrases": ["it'?s ok", "don't worry", "pet pat", "poor cat", "sorry", "i'?m sorry"],
     "calmemojis": ["<:pethappy:575816294054756382>", "<:petsad:575816294251757579>"],
     "badfood": ["cat piss"],
     "badfoodstring": ["<:meowsipglare:580135721160146975>"],
