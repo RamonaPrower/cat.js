@@ -69,8 +69,8 @@ async function handleQuoteTweet(tclient, tweets, message) {
 async function imgWebhookOrMessage(images, message) {
     if (message.guild.me.hasPermission('MANAGE_WEBHOOKS')) {
         const hook = await message.channel.fetchWebhooks();
-        if (hook.size !== 0 && hook.find('name', config.webhookname)) {
-            const sendHook = hook.find('name', config.webhookname);
+        if (hook.size !== 0 && hook.find(i => i.name === config.webhookname)) {
+            const sendHook = hook.find(i => i.name === config.webhookname);
             await imgSendViaHook(images, message, sendHook);
 
         }
@@ -102,12 +102,12 @@ async function imgSendViaHook(images, message, hook) {
 async function quoteWebhookOrMessage(link, message) {
     if (message.guild.me.hasPermission('MANAGE_WEBHOOKS')) {
         const hook = await message.channel.fetchWebhooks();
-        if (hook.size !== 0 && hook.find('name', config.webhookname)) {
-            const sendHook = hook.find('name', config.webhookname);
+        if (hook.size !== 0 && hook.find(i => i.name === config.webhookname)) {
+            const sendHook = hook.find(i => i.name === config.webhookname);
             await quoteSendViaHook(link, sendHook);
 
         }
-        else if (!hook.find('name', config.webhookname)) {
+        else if (!hook.find(i => i.name === config.webhookname)) {
             const sendHook = await message.channel.createWebhook(config.webhookname, './images/twitter.png');
             await quoteSendViaHook(link, sendHook);
         }
