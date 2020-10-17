@@ -41,7 +41,7 @@ for (const file of specialFiles) {
 const awaitHandler = new AwaitHandler();
 
 client.on('ready', () => {
-	console.log(`I'm up, and i'm part of ${client.guilds.size} servers`);
+	console.log(`I'm up, and i'm part of ${client.guilds.cache.size} servers`);
 	const db = config.db;
 	mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
 		.then(() => {
@@ -67,7 +67,7 @@ client.on('message', async message => {
 	if (awaitHandler.isPaused(message.author.id) === true) return;
 	let dice;
 	// storing the results of if is mentioned, and the settings of the guild
-	const mentioned = message.isMentioned(client.user);
+	const mentioned = message.mentions.has(client.user);
 	const thisGuildSettings = await guildSettings.getSettings(message.guild.id);
 
 	// pre-verification admin/info ops
