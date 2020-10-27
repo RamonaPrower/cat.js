@@ -10,19 +10,18 @@ const calming = response => {
 // exports
 module.exports = {
 	async execute(message, awaitHandler) {
-        const react = strings.shout[Math.floor(Math.random() * strings.shout.length)];
-	message.channel.send(react)
-	.then(() => {
-		awaitHandler.add(message.channel.id);
-		message.channel.awaitMessages(calming, { maxMatches: 1, time: 15000, errors: ['time'] })
-		.then(() => {
-			setTimeout(() => {awaitHandler.release(message.channel.id);}, 1000);
-			message.channel.send(strings.calmemojis[Math.floor(Math.random() * strings.calmemojis.length)]);
-		})
-		.catch(() => {
-			setTimeout(() => {awaitHandler.release(message.channel.id);}, 1000);
-		});
-	});
+		const react = strings.shout[Math.floor(Math.random() * strings.shout.length)];
+		message.channel.send(react)
+			.then(() => {
+				awaitHandler.add(message.channel.id);
+				const collector = message.channel.createMessageCollector(calming, { maxMatches: 1, time: 15000 });
+				collector.on('collect', () => {
+					message.channel.send(strings.calmemojis[Math.floor(Math.random() * strings.calmemojis.length)]);
+				})
+				collector.on('end', () => {
+					setTimeout(() => { awaitHandler.release(message.channel.id); }, 1000);
+				})
+			});
 	},
 };
 
