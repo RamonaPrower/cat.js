@@ -10,22 +10,22 @@ const welcome = response => {
 // exports
 module.exports = {
 	async execute(message, awaitHandler) {
-        const react = strings.catsounds[Math.floor(Math.random() * strings.catsounds.length)];
-	message.channel.send(react)
-	.then(() => {
-		awaitHandler.add(message.channel.id);
-		message.channel.awaitMessages(welcome, { maxMatches: 1, time: 15000, errors: ['time'] })
-		.then(async messages => {
-			const userMessage = await messages.first();
-			const userCat = await UserCat.create(userMessage.author.id);
-			userCat.user.positive();
-			message.channel.send(strings.meow.happy[Math.floor(Math.random() * strings.meow.happy.length)]);
-			setTimeout(() => {awaitHandler.release(message.channel.id);}, 1000);
-		})
-		.catch(() => {
-			setTimeout(() => {awaitHandler.release(message.channel.id);}, 1000);
-		});
-	});
+		const react = strings.catsounds[Math.floor(Math.random() * strings.catsounds.length)];
+		message.channel.send(react)
+			.then(() => {
+				awaitHandler.add(message.channel.id);
+				const collector = message.channel.createMessageCollector(welcome, { maxMatches: 1, time: 15000 });
+				collector.on('collect', async newMessage => {
+					const userMessage = newMessage;
+					const userCat = await UserCat.create(userMessage.author.id);
+					userCat.user.positive();
+					await message.channel.send(strings.meow.happy[Math.floor(Math.random() * strings.meow.happy.length)]);
+					collector.stop();
+				});
+				collector.on('end', () => {
+					setTimeout(() => { awaitHandler.release(message.channel.id); }, 1000);
+				})
+			});
 	},
 };
 

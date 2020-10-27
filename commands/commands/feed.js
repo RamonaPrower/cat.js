@@ -19,14 +19,14 @@ module.exports = {
 		if (fedCatStr === '<:meowsip:578260722652413976>') {
 			// we add the current channel to the awaitHandler to stop double posts
 			awaitHandler.add(message.channel.id);
-			message.channel.awaitMessages(badfood, { maxMatches: 1, time: 15000, errors: ['time'] })
-			.then(() => {
+			const collector = message.channel.createMessageCollector(badfood, { maxMatches: 1, time: 15000})
+			collector.on('collect', () => {
 				message.channel.send(strings.badfoodstring);
+				collector.stop();
+			})
+			collector.on('end', () => {
 				setTimeout(() => {awaitHandler.release(message.channel.id);}, 1000);
 			})
-			.catch(() => {
-				setTimeout(() => {awaitHandler.release(message.channel.id);}, 1000);
-			});
 		}
 	});
 	},

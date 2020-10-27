@@ -17,19 +17,23 @@ module.exports = {
             message.channel.send(strings.hug[rand(strings.hug.length)])
             .then(() => {
                 awaitHandler.add(message.channel.id);
-                message.channel.awaitMessages(huggies, { maxMatches: 1, time: 15000, errors: ['time'] })
-                .then(async messages => {
-                    const userMessage = await messages.first();
-                    const userCat = await UserCat.create(userMessage.author.id);
-                    userCat.user.positive();
-                    message.channel.send(strings.meow.happy[rand(strings.meow.happy.length)]);
-                    setTimeout(() => {awaitHandler.release(message.channel.id);}, 1000);
-                }).catch(() => {
-                    message.channel.send(strings.hugdeny[rand(strings.hugdeny.length)]);
-                    setTimeout(() => {awaitHandler.release(message.channel.id);}, 1000);
-                });
+                const collector = message.channel.createMessageCollector(huggies, { maxMatches: 1, time: 15000 });
+                collector.on('collect', async message => {
+                    const userMessage = message;
+                        const userCat = await UserCat.create(userMessage.author.id);
+                        userCat.user.positive();
+                        message.channel.send(strings.meow.happy[rand(strings.meow.happy.length)]);
+                        collector.stop('true');
+                        setTimeout(() => {awaitHandler.release(message.channel.id);}, 1000);
+                })
+                collector.on('end', (collected, reason) => {
+                    if (reason !== 'true') {
+                        message.channel.send(strings.hugdeny[rand(strings.hugdeny.length)]);
+                        setTimeout(() => {awaitHandler.release(message.channel.id);}, 1000);
+                    }
+                    return;
+                })
             });
-
         }
 	},
 };
