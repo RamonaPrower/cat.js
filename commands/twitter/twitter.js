@@ -74,7 +74,7 @@ async function imgWebhookOrMessage(images, message) {
             await imgSendViaHook(images, message, sendHook);
 
         }
-        else if (!hook.find('name', config.webhookname)) {
+        else if (!hook.find(i => i.name === config.webhookname)) {
             const sendHook = await message.channel.createWebhook(config.webhookname, './images/twitter.png');
             await imgSendViaHook(images, message, sendHook);
         }
