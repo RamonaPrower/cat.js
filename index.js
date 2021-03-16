@@ -8,7 +8,6 @@ let globalCat;
 const { GuildSettings } = require('./utils/guild');
 const guildSettings = new GuildSettings;
 const commandList = require('./commands/command');
-const { stubTrue } = require('lodash');
 
 // this is just a bunch of including the commands
 // adding them dynamically is easier but SOMEONE keeps saying it's bad practice so
