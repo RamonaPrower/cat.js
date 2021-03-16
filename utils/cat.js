@@ -124,6 +124,9 @@ class GuildCat extends Cat {
 			return fedStr;
 		}
 	}
+	async wake() {
+		await this.guild.wakeUp();
+	}
 	/**
 	 * Get whether the cat is awake or asleep
 	 * @param {Object} globalCat globalcat is needed to get the accurate mood

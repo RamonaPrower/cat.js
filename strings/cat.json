@@ -34,5 +34,7 @@
     "welcome": ["^hello", "^hi", "^henlo", "^heya", "^hoi"],
     "thankyou": ["thank", "flower"],
     "moms": ["```MY MOMS R", "Colgate#3522 - Main Codebase", "warms#8080 - Initial Implementation", "Else#3573 - Helping with Initial Implementation", "Cat#5365 - Helping with Initial Implementation```"],
-    "vibe": ["<:meowknife:584213063519961128>","<:meowyikes:580076064152485912>", "<:meowterrified:580076064051822592>","<:meowhammer:637324500232437780>"]
+    "vibe": ["<:meowknife:584213063519961128>","<:meowyikes:580076064152485912>", "<:meowterrified:580076064051822592>","<:meowhammer:637324500232437780>"],
+    "pspsps": ["<a:ameowpeek:821423317168816159>", "<:meoweyes:821419657386131507>", "<a:ameowlurk:821423040231505980>"],
+    "sus": ["<:meowsus:821429204125745252>"]
 }
