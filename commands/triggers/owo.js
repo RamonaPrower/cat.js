@@ -1,6 +1,6 @@
 module.exports = {
 	async execute(message) {
-	message.channel.send('<:owo:437503278926921734>');
+	message.channel.send('<:meowowo:839371749228544021>');
 	},
 };
 
