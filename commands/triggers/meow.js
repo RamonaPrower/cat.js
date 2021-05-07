@@ -24,7 +24,7 @@ module.exports = {
 				});
 				collector.on('end', () => {
 					setTimeout(() => { awaitHandler.release(message.channel.id); }, 1000);
-				})
+				});
 			});
 	},
 };

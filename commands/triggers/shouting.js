@@ -17,10 +17,10 @@ module.exports = {
 				const collector = message.channel.createMessageCollector(calming, { maxMatches: 1, time: 15000 });
 				collector.on('collect', () => {
 					message.channel.send(strings.calmemojis[Math.floor(Math.random() * strings.calmemojis.length)]);
-				})
+				});
 				collector.on('end', () => {
 					setTimeout(() => { awaitHandler.release(message.channel.id); }, 1000);
-				})
+				});
 			});
 	},
 };

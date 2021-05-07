@@ -11,25 +11,25 @@ module.exports = {
             access_token_secret: config.atsecret,
         });
         await matchTweets(tclient, message);
-        
+
     },
 
 };
 
 async function matchTweets(tclient, message) {
-    const newReg = /(?<!\|\|)(?<!<)https?:\/\/(?:mobile\.)?twitter\.com\/(?:#!\/)?(?:\w+)\/status(?:es)?\/(\d+)/gmi
+    const newReg = /(?<!\|\|)(?<!<)https?:\/\/(?:mobile\.)?twitter\.com\/(?:#!\/)?(?:\w+)\/status(?:es)?\/(\d+)/gmi;
     const match = newReg.exec(message.content);
-    if (!match[1]) { return console.log('i could\'nt find a match') }
-    tclient.get('statuses/show', { id: match[1], tweet_mode: 'extended' }, async function (error, tweets) {
+    if (!match[1]) { return console.log('i could\'nt find a match'); }
+    tclient.get('statuses/show', { id: match[1], tweet_mode: 'extended' }, async function(error, tweets) {
         if (!error) {
             await handleTweet(tclient, tweets, message);
 
         }
         if (error) {
             console.error(`errored tweet is ${match[0]}`);
-            console.error(error)
+            console.error(error);
         }
-    }
+    },
     );
 }
 
@@ -46,8 +46,8 @@ async function handleTweet(tclient, tweets, message) {
 }
 
 async function handleQuoteTweet(tclient, tweets, message) {
-    let link = `https://twitter.com/${tweets.quoted_status.user.screen_name}/status/${tweets.quoted_status.id_str}`
-    tclient.get('statuses/show', { id: tweets.quoted_status.id_str, tweet_mode: 'extended' }, async function (error, tweets2) {
+    let link = `https://twitter.com/${tweets.quoted_status.user.screen_name}/status/${tweets.quoted_status.id_str}`;
+    tclient.get('statuses/show', { id: tweets.quoted_status.id_str, tweet_mode: 'extended' }, async function(error, tweets2) {
         if (tweets2.extended_entities) {
             if (tweets2.extended_entities.media.length >= 2) {
                 link = link.concat(' ', '(extra images omitted)');
@@ -63,7 +63,7 @@ async function handleQuoteTweet(tclient, tweets, message) {
             await quoteWebhookOrMessage(link, message);
             return;
         }
-    })
+    });
 }
 
 async function imgWebhookOrMessage(images, message) {
@@ -89,7 +89,7 @@ async function imgWebhookOrMessage(images, message) {
         }
         await message.channel.send(data);
     }
-};
+}
 
 async function imgSendViaHook(images, message, hook) {
     const data = [];
@@ -97,7 +97,7 @@ async function imgSendViaHook(images, message, hook) {
         data.push(imageUrl.media_url);
     }
     await hook.send(data);
-};
+}
 
 async function quoteWebhookOrMessage(link, message) {
     if (message.guild.me.hasPermission('MANAGE_WEBHOOKS')) {
@@ -118,7 +118,7 @@ async function quoteWebhookOrMessage(link, message) {
     else {
         await message.channel.send(`Found Quoted Tweet: ${link}`);
     }
-};
+}
 
 
 async function quoteSendViaHook(link, hook) {
@@ -133,4 +133,4 @@ module.exports.info = {
 module.exports.settings = {
     regexp: /(?<!\|\|)(?<!<)https?:\/\/(?:mobile\.)?twitter\.com\/(?:#!\/)?(?:\w+)\/status(?:es)?\/(\d+)/gmi,
     tag: 'twitter',
-}
+};

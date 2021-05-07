@@ -3,7 +3,7 @@ const strings = require('../../strings/cat.json');
 module.exports = {
 	async execute(message) {
         const react = strings.pspsps[Math.floor(Math.random() * strings.pspsps.length)];
-	    message.channel.send(react);
+		message.channel.send(react);
 	},
 };
 

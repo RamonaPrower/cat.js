@@ -78,7 +78,6 @@ guildSchema.methods.feed = async function() {
     await this.save();
 };
 guildSchema.methods.wakeUp = async function() {
-    const timeNow = new Date();
     const diff = moment().diff(this.lastUpdate, 'hours');
     this.asleep = false;
     if (diff === 0) {
@@ -88,7 +87,7 @@ guildSchema.methods.wakeUp = async function() {
         this.lastUpdate = new Date();
     }
     await this.save();
-}
+};
 
 const Guild = mongoose.model('Guild', guildSchema);
 exports.Guild = Guild;

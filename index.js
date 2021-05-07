@@ -3,7 +3,7 @@ const config = require('./config.json');
 const { Cat } = require('./utils/cat');
 const { AwaitHandler } = require('./utils/await');
 const mongoose = require('mongoose');
-const client = new Discord.Client({ disableMentions: "everyone"});
+const client = new Discord.Client({ disableMentions: 'everyone' });
 let globalCat;
 const { GuildSettings } = require('./utils/guild');
 const guildSettings = new GuildSettings;

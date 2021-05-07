@@ -1,5 +1,3 @@
-const strings = require('../../strings/cat.json');
-
 module.exports = {
 	async execute(message) {
         message.channel.send('<:meowsus:821429204125745252>');
