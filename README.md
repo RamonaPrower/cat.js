@@ -87,6 +87,8 @@
   * Summon: owo or uwu
   * Info: responds with a owo face
   * chance: 5%
+#### sus
+  *amogus
 #### Shouting
   * Used by: everyone
   * Summon: LOUD CAPS LOCK IN THE WHOLE MESSAGE
