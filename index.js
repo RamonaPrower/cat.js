@@ -40,10 +40,10 @@ for (const file of specialFiles) {
 
 const awaitHandler = new AwaitHandler();
 
-client.on('ready', () => {
+client.on('ready', async () => {
 	console.log(`I'm up, and i'm part of ${client.guilds.cache.size} servers`);
 	const db = config.db;
-	mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+	mongoose.connect(db)
 		.then(() => {
 			console.log('connected Succesfully to Database');
 		})
