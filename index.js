@@ -40,10 +40,10 @@ for (const file of specialFiles) {
 
 const awaitHandler = new AwaitHandler();
 
-client.on('ready', () => {
+client.on('ready', async () => {
 	console.log(`I'm up, and i'm part of ${client.guilds.cache.size} servers`);
 	const db = config.db;
-	mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+	mongoose.connect(db)
 		.then(() => {
 			console.log('connected Succesfully to Database');
 		})
@@ -66,12 +66,15 @@ client.on('message', async message => {
 	if (message.guild.available === false) return;
 	if (awaitHandler.isPaused(message.author.id) === true) return;
 	let dice;
+	const timeActivated = new Date();
 	// storing the results of if is mentioned, and the settings of the guild
 	const mentioned = message.mentions.has(client.user);
 	const thisGuildSettings = await guildSettings.getSettings(message.guild.id);
 
 	// pre-verification admin/info ops
 	if (mentioned === true) {
+
+		console.log(timeActivated.toLocaleString('en-GB') + ': User ' + message.author.username + ' Mentioned Meow');
 		for (const [key, value] of client.admin) {
 			if (value.settings.regexp.test(message.content)) {
 				if (value.settings.guildSettings) {
@@ -114,6 +117,7 @@ client.on('message', async message => {
 		for (const [key, value] of client.commands) {
 			if (value.settings.regexp.test(message.content)) {
 				// console.log('found ' + value.info.name);
+				console.log(timeActivated.toLocaleString('en-GB') + ': User ' + message.author.username + ' Triggered ' + value.info.name);
 				if (!value.settings.sim || value.settings.sim === true && thisGuildSettings.sim === true) {
 					if (value.settings.await) {
 						if (awaitHandler.isPaused(message.channel.id) === false) {
@@ -138,6 +142,7 @@ client.on('message', async message => {
 	for (const [key, value] of client.triggers) {
 		if (value.settings.regexp.test(message.content) && dice <= value.settings.chance) {
 			if (config.dev === true) {console.log('found ' + value.info.name);}
+			console.log(timeActivated.toLocaleString('en-GB') + ': User ' + message.author.username + ' Triggered ' + value.info.name);
 			if (key === 'shout') {
 				if (thisGuildSettings.shouting === true) {
 					if (awaitHandler.isPaused(message.channel.id) === false) {
@@ -165,6 +170,7 @@ client.on('message', async message => {
 	}
 	// default reaction to @
 	if (mentioned === true) {
+		console.log(timeActivated.toLocaleString('en-GB') + ': User ' + message.author.username + ' Triggered Meow');
 		if (thisGuildSettings.sim === true) {
 			client.commands.get('pet_cat').execute(message, globalCat);
 			return;
