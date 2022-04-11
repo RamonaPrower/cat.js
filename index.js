@@ -74,7 +74,7 @@ client.on('message', async message => {
 	// pre-verification admin/info ops
 	if (mentioned === true) {
 
-		console.log(timeActivated.toLocaleString('en-GB') + ': User ' + message.author.username + 'Mentioned Meow');
+		console.log(timeActivated.toLocaleString('en-GB') + ': User ' + message.author.username + ' Mentioned Meow');
 		for (const [key, value] of client.admin) {
 			if (value.settings.regexp.test(message.content)) {
 				if (value.settings.guildSettings) {
